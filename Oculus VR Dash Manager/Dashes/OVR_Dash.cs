@@ -68,7 +68,9 @@ namespace OVR_Dash_Manager.Dashes
                 if (File.Exists(DashPath))
                 {
                     _Installed = true;
-                    CheckUpdate(DashPath);
+
+                    if (Properties.Settings.Default.CheckUpdate)
+                        CheckUpdate(DashPath);
                 }
             }
         }

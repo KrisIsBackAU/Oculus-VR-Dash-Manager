@@ -12,6 +12,8 @@ namespace OVR_Dash_Manager.Dashes
 
         public static void GenerateDashes()
         {
+            Oculus_Software.Check_Is_Installed();
+
             Oculus_Dash = new OVR_Dash("Offical Oculus Dash", "OculusDash_Normal.exe", ProcessToStop: "vrserver.exe");
             SteamVR_Dash = new OVR_Dash("ItsKaitlyn03 - Oculus Killer", "ItsKaitlyn03_Oculus_Killer.exe", "Oculus Killer", "ItsKaitlyn03", "OculusKiller", "OculusDash.exe");
 

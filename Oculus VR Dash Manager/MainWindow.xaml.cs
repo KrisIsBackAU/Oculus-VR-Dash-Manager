@@ -12,6 +12,8 @@ namespace OVR_Dash_Manager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Boolean FireUIEvents = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace OVR_Dash_Manager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             /// Set Button to Dash Type for linkage
+            chkbx_CheckForUpdates.IsChecked = Properties.Settings.Default.CheckUpdate;
 
             Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting Up"; }));
 
@@ -54,6 +57,7 @@ namespace OVR_Dash_Manager
             CheckSteamVR(null, null);
 
             Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Updating UI"; Update_Dash_Buttons(); }));
+            FireUIEvents = true;
         }
 
         private void Disable_Dash_Buttons()
@@ -157,6 +161,24 @@ namespace OVR_Dash_Manager
         private void lbl_Title_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Functions.OpenURL("https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager");
+        }
+
+        private void chkbx_CheckForUpdates_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!FireUIEvents)
+                return;
+
+            Properties.Settings.Default.CheckUpdate = (bool)chkbx_CheckForUpdates.IsChecked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void chkbx_CheckForUpdates_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!FireUIEvents)
+                return;
+
+            Properties.Settings.Default.CheckUpdate = (bool)chkbx_CheckForUpdates.IsChecked;
+            Properties.Settings.Default.Save();
         }
     }
 }

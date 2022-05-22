@@ -7,8 +7,21 @@ namespace OVR_Dash_Manager
 {
     public static class Oculus_Software
     {
-        public static readonly String OculusDashDirectory = @"C:\Program Files\Oculus\Support\oculus-dash\dash\bin";
-        public static readonly String OculusDashFile = @"C:\Program Files\Oculus\Support\oculus-dash\dash\bin\OculusDash.exe";
+        private static string _OculusDashDirectory;
+
+        public static string OculusDashDirectory
+        {
+            get { return _OculusDashDirectory; }
+            private set { _OculusDashDirectory = value; }
+        }
+
+        private static string _OculusDashFile;
+
+        public static string OculusDashFile
+        {
+            get { return _OculusDashFile; }
+            private set { _OculusDashFile = value; }
+        }
 
         private static bool _OculusInstalled;
 
@@ -40,6 +53,20 @@ namespace OVR_Dash_Manager
         {
             get { return _CustomDashName; }
             private set { _CustomDashName = value; }
+        }
+
+        public static void Check_Is_Installed()
+        {
+            // @"C:\Program Files\Oculus\Support\oculus-dash\dash\bin";
+            // @"C:\Program Files\Oculus\Support\oculus-dash\dash\bin\OculusDash.exe";
+            String OculusPath = Environment.GetEnvironmentVariable("OculusBase");
+
+            if (Directory.Exists(OculusPath))
+            {
+                _OculusDashDirectory = Path.Combine(OculusPath, @"Support\oculus-dash\dash\bin");
+                _OculusDashFile = Path.Combine(_OculusDashDirectory, @"OculusDash.exe");
+            }    
+
         }
 
         private static void ClearDashSetting()
