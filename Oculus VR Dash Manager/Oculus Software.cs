@@ -65,8 +65,7 @@ namespace OVR_Dash_Manager
             {
                 _OculusDashDirectory = Path.Combine(OculusPath, @"Support\oculus-dash\dash\bin");
                 _OculusDashFile = Path.Combine(_OculusDashDirectory, @"OculusDash.exe");
-            }    
-
+            }
         }
 
         private static void ClearDashSetting()

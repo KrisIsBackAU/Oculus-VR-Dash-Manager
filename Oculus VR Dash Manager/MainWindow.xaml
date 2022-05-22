@@ -15,10 +15,11 @@
             <Grid x:Name="gd_DashButtons">
                 <Button x:Name="btn_Normal" Content="Offical Dash (SteamVR Hover for 5 Seconds)" HorizontalAlignment="Left" Width="270" Margin="0,0,0,23" Click="btn_ActivateDash_Click" MouseEnter="btn_Normal_MouseEnter" MouseLeave="btn_Normal_MouseLeave" />
                 <ProgressBar x:Name="pb_Normal" HorizontalAlignment="Left" Width="270" Maximum="5000" SmallChange="10" Height="23" VerticalAlignment="Bottom" />
-                <Label x:Name="lbl_ItsKaitlyn03" Content="Visit ItsKaitlyn03 (Github)" HorizontalAlignment="Right" Width="270" Height="32" VerticalAlignment="Bottom" FontSize="12" HorizontalContentAlignment="Right" Cursor="Hand" PreviewMouseDown="lbl_ItsKaitlyn03_PreviewMouseDown" VerticalContentAlignment="Bottom"/>
+                <Label x:Name="lbl_ItsKaitlyn03" Content="Visit ItsKaitlyn03 (Github)" HorizontalAlignment="Right" Width="270" Height="32" VerticalAlignment="Bottom" FontSize="12" HorizontalContentAlignment="Right" Cursor="Hand" PreviewMouseDown="lbl_ItsKaitlyn03_PreviewMouseDown" VerticalContentAlignment="Bottom" />
                 <Button x:Name="btn_SteamVR" Content=" ItsKaitlyn03 / OculusKiller - SteamVR Only" HorizontalAlignment="Right" Width="270" Click="btn_ActivateDash_Click" Margin="0,0,0,23" />
             </Grid>
         </GroupBox>
-        <CheckBox x:Name="chkbx_CheckForUpdates" Content="Check for Updates on Launch" HorizontalAlignment="Right" Margin="0,0,10,66" VerticalAlignment="Bottom" Width="180" Checked="chkbx_CheckForUpdates_Checked" Unchecked="chkbx_CheckForUpdates_Unchecked"/>
+        <CheckBox x:Name="chkbx_CheckForUpdates" Content="Check for Updates on Launch" HorizontalAlignment="Right" Margin="0,0,10,66" VerticalAlignment="Bottom" Width="180" Checked="chkbx_CheckForUpdates_Checked" Unchecked="chkbx_CheckForUpdates_Unchecked" />
+        <CheckBox x:Name="chkbx_AlwaysOnTop" Content="Always On Top" HorizontalAlignment="Left" Margin="10,0,0,63" VerticalAlignment="Bottom" Width="180" Checked="chkbx_AlwaysOnTop_Checked" Unchecked="chkbx_AlwaysOnTop_Unchecked"/>
     </Grid>
 </Window>

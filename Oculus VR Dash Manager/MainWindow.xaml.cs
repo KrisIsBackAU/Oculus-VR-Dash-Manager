@@ -22,15 +22,16 @@ namespace OVR_Dash_Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            /// Set Button to Dash Type for linkage
             chkbx_CheckForUpdates.IsChecked = Properties.Settings.Default.CheckUpdate;
+            chkbx_AlwaysOnTop.IsChecked = Properties.Settings.Default.AlwaysOnTop;
+
+            Topmost = Properties.Settings.Default.AlwaysOnTop;
 
             Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting Up"; }));
 
-            btn_Normal.Tag = Dashes.Dash_Type.Normal;
-            btn_SteamVR.Tag = Dashes.Dash_Type.OculusKiller;
-            Disable_Dash_Buttons();
+            LinkDashesToButtons();
 
+            Disable_Dash_Buttons();
 
             if (Functions.IsCurrentProcess_Elevated())
                 Elevated = true;
@@ -38,6 +39,12 @@ namespace OVR_Dash_Manager
             Thread Start = new Thread(Startup);
             Start.IsBackground = true;
             Start.Start();
+        }
+
+        private void LinkDashesToButtons()
+        {
+            btn_Normal.Tag = Dashes.Dash_Type.Normal;
+            btn_SteamVR.Tag = Dashes.Dash_Type.OculusKiller;
         }
 
         private void Startup()
@@ -55,15 +62,22 @@ namespace OVR_Dash_Manager
 
                 Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting SteamVR Watcher"; }));
 
-                Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
-                Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
 
-                Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(500), Check_Hover);
-                Dispatcher_Timer_Functions.StartTimer("Hover Checker");
 
                 CheckSteamVR(null, null);
 
-                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Updating UI"; Update_Dash_Buttons(); }));
+                Functions.DoAction(this, new Action(delegate () 
+                { 
+                    lbl_CurrentSetting.Content = "Updating UI"; 
+                    Update_Dash_Buttons();
+
+                    Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
+                    Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
+
+                    Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(500), Check_Hover);
+                    Dispatcher_Timer_Functions.StartTimer("Hover Checker");
+
+                }));
                 FireUIEvents = true;
             }
             else
@@ -109,6 +123,7 @@ namespace OVR_Dash_Manager
                     Dashes.Dash_Manager.Activate(Dash);
                     Oculus_Software.Check_Current_Dash();
                     lbl_CurrentSetting.Content = Oculus_Software.CustomDashName;
+                    pb_Normal.Value = 0;
                 }
             }
         }
@@ -117,7 +132,7 @@ namespace OVR_Dash_Manager
 
         private void CheckSteamVR(object sender, EventArgs args)
         {
-            Process[] SteamVR = Process.GetProcessesByName("vrserver.exe");
+            Process[] SteamVR = Process.GetProcessesByName("vrserver");
             if (SteamVR.Length > 0)
                 SteamVR_Running = true;
             else
@@ -157,7 +172,7 @@ namespace OVR_Dash_Manager
                     if (Passed.TotalSeconds >= 5)
                     {
                         Hovering_Normal_Button = false;
-                        pb_Normal.Value = 0;
+                        pb_Normal.Value = 5000;
                         btn_ActivateDash_Click(btn_Normal, null);
                     }
                 }
@@ -195,6 +210,23 @@ namespace OVR_Dash_Manager
 
             Properties.Settings.Default.CheckUpdate = (bool)chkbx_CheckForUpdates.IsChecked;
             Properties.Settings.Default.Save();
+        }
+
+        private void chkbx_AlwaysOnTop_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.CheckUpdate = (bool)chkbx_AlwaysOnTop.IsChecked;
+            Properties.Settings.Default.Save();
+
+            Topmost = Properties.Settings.Default.AlwaysOnTop;
+
+        }
+
+        private void chkbx_AlwaysOnTop_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.CheckUpdate = (bool)chkbx_AlwaysOnTop.IsChecked;
+            Properties.Settings.Default.Save();
+
+            Topmost = Properties.Settings.Default.AlwaysOnTop;
         }
     }
 }
