@@ -1,0 +1,21 @@
+﻿<Window x:Class="OVR_Dash_Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OVR_Dash_Manager"
+        mc:Ignorable="d"
+        Title="Oculus VR Dash Manager" Height="255" Width="608" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Label Content="Oculus VR Dash Manager - KrisIsBack" Margin="10,10,10,0" VerticalAlignment="Top" Height="41" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" Cursor="Hand" />
+        <Label Content="Current Dash" Margin="10,0,10,56" VerticalAlignment="Bottom" Height="41" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" />
+        <Label x:Name="lbl_CurrentSetting" Content="" Margin="10,0,10,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Height="41" VerticalAlignment="Bottom" />
+        <GroupBox Header="Dashes" Margin="10,51,10,99">
+            <Grid x:Name="gd_DashButtons">
+                <Button x:Name="btn_Normal" Content="Normal (SteamVR Hover for 5 Seconds)" HorizontalAlignment="Left" Width="270" Margin="0,0,0,10" Click="btn_ActivateDash_Click" MouseEnter="btn_Normal_MouseEnter" MouseLeave="btn_Normal_MouseLeave" />
+                <Button x:Name="btn_SteamVR" Content=" ItsKaitlyn03 / OculusKiller - SteamVR Only" HorizontalAlignment="Right" Width="270" Click="btn_ActivateDash_Click" />
+                <ProgressBar x:Name="pb_Normal" HorizontalAlignment="Left" Width="270" Maximum="5000" SmallChange="10" Height="10" VerticalAlignment="Bottom" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

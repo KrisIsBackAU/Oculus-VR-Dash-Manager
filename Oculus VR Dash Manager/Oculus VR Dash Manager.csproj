@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>OVR_Dash_Manager</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>Oculus VR Dash Manager</AssemblyName>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <StartupObject>OVR_Dash_Manager.App</StartupObject>
+    <Description>Oculus VR Dash Manager - Swap Between Supported Dashboard With Ease</Description>
+    <Copyright>KrisIsBack - AU</Copyright>
+    <PackageIcon>Icon.ico</PackageIcon>
+    <PackageIconUrl />
+    <Version>0.5.0</Version>
+    <Authors>KrisIsBack - AU</Authors>
+    <PackageReleaseNotes>Offical &amp; ItsKaitlyn03 - Oculus Killer - Supported with Updates</PackageReleaseNotes>
+    <NeutralLanguage>en-AU</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Icon.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
