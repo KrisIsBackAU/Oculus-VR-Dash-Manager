@@ -13,6 +13,7 @@ namespace OVR_Dash_Manager
     public partial class MainWindow : Window
     {
         private Boolean FireUIEvents = false;
+        private Boolean Elevated = false;
 
         public MainWindow()
         {
@@ -30,6 +31,10 @@ namespace OVR_Dash_Manager
             btn_SteamVR.Tag = Dashes.Dash_Type.OculusKiller;
             Disable_Dash_Buttons();
 
+
+            if (Functions.IsCurrentProcess_Elevated())
+                Elevated = true;
+
             Thread Start = new Thread(Startup);
             Start.IsBackground = true;
             Start.Start();
@@ -37,27 +42,38 @@ namespace OVR_Dash_Manager
 
         private void Startup()
         {
-            Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Checking Installed Dashes & Updates"; }));
-            Dashes.Dash_Manager.GenerateDashes();
-
-            if (!Oculus_Software.OculusInstalled)
+            if (Elevated)
             {
-                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Oculus Directory Not Found"; }));
-                return;
+                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Checking Installed Dashes & Updates"; }));
+                Dashes.Dash_Manager.GenerateDashes();
+
+                if (!Oculus_Software.OculusInstalled)
+                {
+                    Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Oculus Directory Not Found"; }));
+                    return;
+                }
+
+                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting SteamVR Watcher"; }));
+
+                Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
+                Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
+
+                Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(500), Check_Hover);
+                Dispatcher_Timer_Functions.StartTimer("Hover Checker");
+
+                CheckSteamVR(null, null);
+
+                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Updating UI"; Update_Dash_Buttons(); }));
+                FireUIEvents = true;
             }
-
-            Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting SteamVR Watcher"; }));
-
-            Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
-            Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
-
-            Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(500), Check_Hover);
-            Dispatcher_Timer_Functions.StartTimer("Hover Checker");
-
-            CheckSteamVR(null, null);
-
-            Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Updating UI"; Update_Dash_Buttons(); }));
-            FireUIEvents = true;
+            else
+            {
+                Functions.DoAction(this, new Action(delegate ()
+                {
+                    lbl_CurrentSetting.Content = "Run as Admin Required";
+                    MessageBox.Show(this, "This proram must be run with Admin Permissions", "This proram must be run with Admin Permissions", MessageBoxButton.OK, MessageBoxImage.Error);
+                }));
+            }
         }
 
         private void Disable_Dash_Buttons()

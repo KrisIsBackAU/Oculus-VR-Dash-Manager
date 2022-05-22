@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -123,6 +124,26 @@ namespace OVR_Dash_Manager
         public static void DoAction(Window Form, Action DoAction)
         {
             Form.Dispatcher.Invoke(DoAction, DispatcherPriority.Normal);
+        }
+
+        public static Boolean IsCurrentProcess_Elevated()
+        {
+            WindowsIdentity vIdentity = GetWindowsIdentity();
+            WindowsPrincipal vPrincipal = GetWindowsPrincipal(vIdentity);
+
+            bool pReturn = vPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+            vIdentity.Dispose();
+            return pReturn;
+        }
+
+        public static WindowsIdentity GetWindowsIdentity()
+        {
+            return WindowsIdentity.GetCurrent();
+        }
+
+        public static WindowsPrincipal GetWindowsPrincipal(WindowsIdentity pIdentity)
+        {
+            return new WindowsPrincipal(pIdentity);
         }
     }
 
