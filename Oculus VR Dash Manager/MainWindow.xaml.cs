@@ -74,7 +74,7 @@ namespace OVR_Dash_Manager
                     Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
                     Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
 
-                    Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(500), Check_Hover);
+                    Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromSeconds(1), Check_Hover);
                     Dispatcher_Timer_Functions.StartTimer("Hover Checker");
 
                 }));
@@ -136,7 +136,7 @@ namespace OVR_Dash_Manager
             if (SteamVR.Length > 0)
                 SteamVR_Running = true;
             else
-                SteamVR_Running = false;
+                SteamVR_Running = true;
         }
 
         private bool Hovering_Normal_Button = false;
@@ -148,7 +148,7 @@ namespace OVR_Dash_Manager
             Hover_Normal_Time = DateTime.Now;
 
             if (SteamVR_Running)
-                pb_Normal.Value = 100;
+                pb_Normal.Value = 1000;
             else
                 pb_Normal.Value = 0;
         }
@@ -172,7 +172,16 @@ namespace OVR_Dash_Manager
                     if (Passed.TotalSeconds >= 5)
                     {
                         Hovering_Normal_Button = false;
+
                         pb_Normal.Value = 5000;
+                        pb_Normal.UpdateLayout();
+
+                        Point relativePoint = lbl_CurrentSetting.TransformToAncestor(this).Transform(new Point(0, 0));
+                        Point pt = new Point(relativePoint.X + lbl_CurrentSetting.ActualWidth / 2, relativePoint.Y + lbl_CurrentSetting.ActualHeight / 2);
+                        Point windowCenterPoint = pt;//new Point(125, 80);
+                        Point centerPointRelativeToSCreen = this.PointToScreen(windowCenterPoint);
+                        Functions.MoveCursor((int)centerPointRelativeToSCreen.X, (int)centerPointRelativeToSCreen.Y);
+
                         btn_ActivateDash_Click(btn_Normal, null);
                     }
                 }

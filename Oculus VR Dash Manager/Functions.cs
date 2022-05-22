@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -144,6 +145,14 @@ namespace OVR_Dash_Manager
         public static WindowsPrincipal GetWindowsPrincipal(WindowsIdentity pIdentity)
         {
             return new WindowsPrincipal(pIdentity);
+        }
+
+        [DllImport("User32.dll")]
+        private static extern bool SetCursorPos(int X, int Y);
+
+        public static void MoveCursor(int X, int Y)
+        {
+            SetCursorPos(X, Y);
         }
     }
 
