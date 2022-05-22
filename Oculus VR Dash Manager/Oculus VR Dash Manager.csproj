@@ -9,13 +9,15 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <StartupObject>OVR_Dash_Manager.App</StartupObject>
     <Description>Oculus VR Dash Manager - Swap Between Supported Dashboard With Ease</Description>
-    <Copyright>KrisIsBack - AU</Copyright>
+    <Copyright>KrisIsBack (AU)</Copyright>
     <PackageIcon>Icon.ico</PackageIcon>
     <PackageIconUrl />
     <Version>0.5.0</Version>
-    <Authors>KrisIsBack - AU</Authors>
-    <PackageReleaseNotes>Offical &amp; ItsKaitlyn03 - Oculus Killer - Supported with Updates</PackageReleaseNotes>
+    <Authors>KrisIsBack (AU)</Authors>
+    <PackageReleaseNotes>Offical &amp; ItsKaitlyn03 - Oculus Killer - Supported with Updates
+https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
     <NeutralLanguage>en-AU</NeutralLanguage>
+    <RepositoryUrl>https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

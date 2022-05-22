@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,23 +21,52 @@ namespace OVR_Dash_Manager
         {
             /// Set Button to Dash Type for linkage
 
+            Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting Up"; }));
+
             btn_Normal.Tag = Dashes.Dash_Type.Normal;
             btn_SteamVR.Tag = Dashes.Dash_Type.OculusKiller;
+            Disable_Dash_Buttons();
 
-            foreach (UIElement item in gd_DashButtons.Children)
-            {
-                if (item is Button button)
-                    item.IsEnabled = false;
-            }
+            Thread Start = new Thread(Startup);
+            Start.IsBackground = true;
+            Start.Start();
+        }
 
+        private void Startup()
+        {
+            Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Checking Installed Dashes & Updates"; }));
             Dashes.Dash_Manager.GenerateDashes();
 
             if (!Oculus_Software.OculusInstalled)
             {
-                lbl_CurrentSetting.Content = "Oculus Directory Not Found";
+                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Oculus Directory Not Found"; }));
                 return;
             }
 
+            Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting SteamVR Watcher"; }));
+
+            Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
+            Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
+
+            Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(500), Check_Hover);
+            Dispatcher_Timer_Functions.StartTimer("Hover Checker");
+
+            CheckSteamVR(null, null);
+
+            Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Updating UI"; Update_Dash_Buttons(); }));
+        }
+
+        private void Disable_Dash_Buttons()
+        {
+            foreach (UIElement item in gd_DashButtons.Children)
+            {
+                if (item is Button button)
+                    button.IsEnabled = false;
+            }
+        }
+
+        private void Update_Dash_Buttons()
+        {
             // Only Enabled Whats Installed
             foreach (UIElement item in gd_DashButtons.Children)
             {
@@ -48,14 +78,6 @@ namespace OVR_Dash_Manager
             }
 
             lbl_CurrentSetting.Content = Oculus_Software.CustomDashName;
-
-            Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
-            Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
-
-            Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(500), Check_Hover);
-            Dispatcher_Timer_Functions.StartTimer("Hover Checker");
-
-            CheckSteamVR(null, null);
         }
 
         private void btn_ActivateDash_Click(object sender, RoutedEventArgs e)
@@ -125,6 +147,16 @@ namespace OVR_Dash_Manager
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Dispatcher_Timer_Functions.StopTimer("SteamVR Checker");
+        }
+
+        private void lbl_ItsKaitlyn03_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Functions.OpenURL("https://github.com/ItsKaitlyn03/OculusKiller");
+        }
+
+        private void lbl_Title_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Functions.OpenURL("https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager");
         }
     }
 }

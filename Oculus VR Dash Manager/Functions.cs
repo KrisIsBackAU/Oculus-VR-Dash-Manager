@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace OVR_Dash_Manager
@@ -106,6 +108,21 @@ namespace OVR_Dash_Manager
             {
                 return false;
             }
+        }
+
+        public static void OpenURL(String URL)
+        {
+            ProcessStartInfo ps = new ProcessStartInfo(URL)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
+        }
+
+        public static void DoAction(Window Form, Action DoAction)
+        {
+            Form.Dispatcher.Invoke(DoAction, DispatcherPriority.Normal);
         }
     }
 
