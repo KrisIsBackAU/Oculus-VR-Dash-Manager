@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -14,6 +15,11 @@ namespace OVR_Dash_Manager
 {
     public static class Functions
     {
+        public static void ShowFileInDirectory(String FullPath)
+        {
+            Process.Start("explorer.exe", $@"/select,""{FullPath}""");
+        }
+
         public static String GetPageHTML(String pURL, String Method = "GET", CookieContainer Cookies = null, String FormParams = "", String ContentType = "")
         {
             if (pURL.Contains("&amp;"))
@@ -155,24 +161,39 @@ namespace OVR_Dash_Manager
             SetCursorPos(X, Y);
         }
     }
-
-    public static class Dispatcher_Timer_Functions
+    public static class Timer_Functions
     {
-        private static Dictionary<String, DispatcherTimer> gTimers = null;
-        private static Dictionary<String, Boolean> gAutoRepeat = null;
+        private static Dictionary<String, Timer> gTimers = null;
         private static Boolean BeenSetup = false;
 
         private static void Setup()
         {
             if (gTimers == null)
             {
-                gTimers = new Dictionary<string, DispatcherTimer>();
-                gAutoRepeat = new Dictionary<string, bool>();
+                gTimers = new Dictionary<string, Timer>();
                 BeenSetup = true;
             }
         }
 
-        public static Boolean CreateTimer(String pTimerID, TimeSpan pInterval, EventHandler pTickHandler, Boolean pRepeat = true)
+        public static Boolean SetNewInterval(String pTimerID, TimeSpan pInterval)
+        {
+            if (!BeenSetup)
+                return false;
+
+
+            Boolean pReturn = false;
+
+            if (gTimers.ContainsKey(pTimerID))
+            {
+                Timer vTimer = gTimers[pTimerID];
+                vTimer.Interval = pInterval.TotalMilliseconds;
+                pReturn = true;
+            }
+
+            return pReturn;
+        }
+
+        public static Boolean CreateTimer(String pTimerID, TimeSpan pInterval, ElapsedEventHandler pTickHandler, Boolean pRepeat = true)
         {
             if (!BeenSetup)
                 Setup();
@@ -181,20 +202,17 @@ namespace OVR_Dash_Manager
 
             if (!gTimers.ContainsKey(pTimerID))
             {
-                DispatcherTimer vTimer = new DispatcherTimer
+                Timer vTimer = new Timer
                 {
-                    Interval = pInterval,
-                    IsEnabled = true,
-                    Tag = pTimerID
+                    Interval = pInterval.TotalMilliseconds,
+                    AutoReset = pRepeat,
+                    Enabled = false
                 };
 
-                vTimer.Tick += ElpasedAutoRetrigger;
-                vTimer.Tick += pTickHandler;
-
-                vTimer.Stop();
+                vTimer.Elapsed += pTickHandler;
+                vTimer.Start();
 
                 gTimers.Add(pTimerID, vTimer);
-                gAutoRepeat.Add(pTimerID, pReturn);
 
                 pReturn = true;
             }
@@ -202,29 +220,18 @@ namespace OVR_Dash_Manager
             return pReturn;
         }
 
-        private static void ElpasedAutoRetrigger(object sender, EventArgs args)
-        {
-            DispatcherTimer pTimer = (DispatcherTimer)sender;
-            Boolean Repeat = false;
-            gAutoRepeat.TryGetValue(pTimer.Tag.ToString(), out Repeat);
-            if (Repeat)
-            {
-                pTimer.Stop();
-                pTimer.Start();
-            }
-        }
-
         public static Boolean StartTimer(String pTimerID)
         {
             if (!BeenSetup)
                 return false;
 
+
             Boolean pReturn = false;
 
             if (gTimers.ContainsKey(pTimerID))
             {
-                DispatcherTimer vTimer = gTimers[pTimerID];
-                vTimer.Start();
+                Timer vTimer = gTimers[pTimerID];
+                vTimer.Enabled = true;
                 pReturn = true;
             }
 
@@ -236,12 +243,13 @@ namespace OVR_Dash_Manager
             if (!BeenSetup)
                 return false;
 
+
             Boolean pReturn = false;
 
             if (gTimers.ContainsKey(pTimerID))
             {
-                DispatcherTimer vTimer = gTimers[pTimerID];
-                vTimer.Stop();
+                Timer vTimer = gTimers[pTimerID];
+                vTimer.Enabled = false;
                 pReturn = true;
             }
 
@@ -263,30 +271,25 @@ namespace OVR_Dash_Manager
 
         public static void DisposeTimer(String pTimerID)
         {
-            if (!BeenSetup)
-                return;
-
             if (gTimers.ContainsKey(pTimerID))
             {
-                DispatcherTimer vTimer = gTimers[pTimerID];
+                Timer vTimer = gTimers[pTimerID];
                 gTimers.Remove(pTimerID);
-                gAutoRepeat.Remove(pTimerID);
+
                 vTimer.Stop();
             }
         }
 
         public static void DisposeAllTimers()
         {
-            if (!BeenSetup)
-                return;
-
-            foreach (KeyValuePair<String, DispatcherTimer> oTimer in gTimers)
+            foreach (KeyValuePair<String, Timer> oTimer in gTimers)
             {
                 oTimer.Value.Stop();
+                oTimer.Value.Dispose();
             }
 
             gTimers.Clear();
-            gAutoRepeat.Clear();
         }
     }
+
 }

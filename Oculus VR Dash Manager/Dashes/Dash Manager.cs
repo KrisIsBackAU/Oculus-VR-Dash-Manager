@@ -204,5 +204,10 @@ namespace OVR_Dash_Manager.Dashes
                     return false;
             }
         }
+        
+        public static bool Oculus_Offical_Dash_Installed()
+        {
+            return Oculus_Dash.Installed;
+        }
     }
 }

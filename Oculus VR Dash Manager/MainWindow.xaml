@@ -5,21 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OVR_Dash_Manager"
         mc:Ignorable="d"
-        Title="Oculus VR Dash Manager" Height="284" Width="608" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Oculus VR Dash Manager" Height="374" Width="626" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid Background="{StaticResource WindowBackgroundBrush}">
         <Label x:Name="lbl_Title" Content="Oculus VR Dash Manager - KrisIsBack (AU)" Margin="10,5,10,0" VerticalAlignment="Top" Height="41" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" Cursor="Hand" PreviewMouseDown="lbl_Title_PreviewMouseDown" />
-        <Label Content="Current Dash" Margin="10,0,10,36" VerticalAlignment="Bottom" Height="41" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" />
-        <Label x:Name="lbl_CurrentSetting" Content="Unknown" Margin="10,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Height="36" VerticalAlignment="Bottom" />
-        <GroupBox Header="Dashes" Margin="10,51,10,82">
+        <Label Content="Current Dash" Margin="10,222,10,0" VerticalAlignment="Top" Height="41" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontWeight="Bold" />
+        <Label x:Name="lbl_CurrentSetting" Content="Unknown" Margin="10,263,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Height="36" VerticalAlignment="Top" />
+        <GroupBox Header="Dashes" Margin="10,51,10,0" Height="171" VerticalAlignment="Top">
             <Grid x:Name="gd_DashButtons">
-                <Button x:Name="btn_Normal" Content="Offical Dash (SteamVR Hover for 5 Seconds)" HorizontalAlignment="Left" Width="270" Margin="0,0,0,23" Click="btn_ActivateDash_Click" MouseEnter="btn_Normal_MouseEnter" MouseLeave="btn_Normal_MouseLeave" />
-                <ProgressBar x:Name="pb_Normal" HorizontalAlignment="Left" Width="270" Maximum="5000" SmallChange="10" Height="23" VerticalAlignment="Bottom" />
-                <Label x:Name="lbl_ItsKaitlyn03" Content="Visit ItsKaitlyn03 (Github)" HorizontalAlignment="Right" Width="270" Height="32" VerticalAlignment="Bottom" FontSize="12" HorizontalContentAlignment="Right" Cursor="Hand" PreviewMouseDown="lbl_ItsKaitlyn03_PreviewMouseDown" VerticalContentAlignment="Bottom" />
-                <Button x:Name="btn_SteamVR" Content=" ItsKaitlyn03 / OculusKiller - SteamVR Only" HorizontalAlignment="Right" Width="270" Click="btn_ActivateDash_Click" Margin="0,0,0,23" />
+                <Button x:Name="btn_Normal" Content="Offical Dash&#10;&#10;(SteamVR)&#10;Hover for 5 Seconds" HorizontalAlignment="Left" Width="200" Margin="0,0,0,23" Click="btn_ActivateDash_Click" MouseEnter="btn_Normal_MouseEnter" MouseLeave="btn_Normal_MouseLeave" />
+                <ProgressBar x:Name="pb_Normal" HorizontalAlignment="Left" Width="200" Maximum="5000" SmallChange="10" Height="23" VerticalAlignment="Bottom" />
+                <Label x:Name="lbl_ItsKaitlyn03" Content="Visit ItsKaitlyn03 (Github)" HorizontalAlignment="Left" Width="200" Height="32" VerticalAlignment="Bottom" FontSize="12" HorizontalContentAlignment="Right" Cursor="Hand" PreviewMouseDown="lbl_ItsKaitlyn03_PreviewMouseDown" VerticalContentAlignment="Bottom" Margin="217,0,0,0" />
+                <Button x:Name="btn_SteamVR" Content="ItsKaitlyn03 / OculusKiller&#10;&#10;(SteamVR Mode Only)" HorizontalAlignment="Left" Width="200" Click="btn_ActivateDash_Click" Margin="217,0,0,23" />
+                <Button x:Name="btn_ExitOculusLink" HorizontalAlignment="Right" Width="143" Click="btn_ActivateDash_Click" Margin="0,0,0,23" Content="Exit Link&#10;&#10;(SteamVR)&#10;Hover 5 Seconds" MouseEnter="btn_ExitOculusLink_MouseEnter" MouseLeave="btn_ExitOculusLink_MouseLeave" />
+                <ProgressBar x:Name="pb_Exit" HorizontalAlignment="Right" Width="143" Maximum="5000" SmallChange="10" Height="23" VerticalAlignment="Bottom" />
             </Grid>
         </GroupBox>
-        <CheckBox x:Name="chkbx_CheckForUpdates" Content="Check for Updates on Launch" HorizontalAlignment="Right" Margin="0,0,10,66" VerticalAlignment="Bottom" Width="180" Checked="chkbx_CheckForUpdates_Checked" Unchecked="chkbx_CheckForUpdates_Unchecked" />
-        <CheckBox x:Name="chkbx_AlwaysOnTop" Content="Always On Top" HorizontalAlignment="Left" Margin="10,0,0,63" VerticalAlignment="Bottom" Width="180" Checked="chkbx_AlwaysOnTop_Checked" Unchecked="chkbx_AlwaysOnTop_Unchecked"/>
+        <CheckBox x:Name="chkbx_CheckForUpdates" Content="Check for Updates on Launch" HorizontalAlignment="Left" Margin="160,0,0,13" Width="180" Checked="chkbx_CheckForUpdates_Checked" Unchecked="chkbx_CheckForUpdates_Unchecked" Height="16" VerticalAlignment="Bottom" />
+        <CheckBox x:Name="chkbx_AlwaysOnTop" Content="Always On Top" HorizontalAlignment="Left" Margin="373,0,0,13" Width="130" Checked="chkbx_AlwaysOnTop_Checked" Unchecked="chkbx_AlwaysOnTop_Unchecked" Height="16" VerticalAlignment="Bottom"/>
+        <Button x:Name="btn_OpenDashLocation" Content="Open Dash Location" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Click="btn_OpenDashLocation_Click" Height="22" Width="114"/>
     </Grid>
 </Window>

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Timers;
 
 namespace OVR_Dash_Manager
 {
@@ -43,6 +44,7 @@ namespace OVR_Dash_Manager
 
         private void LinkDashesToButtons()
         {
+            btn_ExitOculusLink.Tag = Dashes.Dash_Type.Exit;
             btn_Normal.Tag = Dashes.Dash_Type.Normal;
             btn_SteamVR.Tag = Dashes.Dash_Type.OculusKiller;
         }
@@ -60,8 +62,13 @@ namespace OVR_Dash_Manager
                     return;
                 }
 
-                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting SteamVR Watcher"; }));
+                if (!Dashes.Dash_Manager.Oculus_Offical_Dash_Installed())
+                {
+                    Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Offical Oculus Dash Not Found, Please Replace Original Oculus Dash"; }));
+                    return;
+                }
 
+                Functions.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Starting SteamVR Watcher"; }));
 
 
                 CheckSteamVR(null, null);
@@ -71,11 +78,17 @@ namespace OVR_Dash_Manager
                     lbl_CurrentSetting.Content = "Updating UI"; 
                     Update_Dash_Buttons();
 
-                    Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
-                    Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
+                    Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
+                    Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromMilliseconds(250), Check_Hover);
+                    
+                    Timer_Functions.StartTimer("SteamVR Checker");
+                    Timer_Functions.StartTimer("Hover Checker");
 
-                    Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromSeconds(1), Check_Hover);
-                    Dispatcher_Timer_Functions.StartTimer("Hover Checker");
+                    //Dispatcher_Timer_Functions.CreateTimer("SteamVR Checker", TimeSpan.FromSeconds(10), CheckSteamVR);
+                    //Dispatcher_Timer_Functions.StartTimer("SteamVR Checker");
+
+                    //Dispatcher_Timer_Functions.CreateTimer("Hover Checker", TimeSpan.FromSeconds(1), Check_Hover);
+                    //Dispatcher_Timer_Functions.StartTimer("Hover Checker");
 
                 }));
                 FireUIEvents = true;
@@ -111,6 +124,8 @@ namespace OVR_Dash_Manager
                 }
             }
 
+            btn_ExitOculusLink.IsEnabled = true;
+
             lbl_CurrentSetting.Content = Oculus_Software.CustomDashName;
         }
 
@@ -124,73 +139,28 @@ namespace OVR_Dash_Manager
                     Oculus_Software.Check_Current_Dash();
                     lbl_CurrentSetting.Content = Oculus_Software.CustomDashName;
                     pb_Normal.Value = 0;
+                    pb_Exit.Value = 0;
                 }
             }
         }
 
         private bool SteamVR_Running = false;
 
-        private void CheckSteamVR(object sender, EventArgs args)
+        private void CheckSteamVR(object sender, ElapsedEventArgs args)
         {
             Process[] SteamVR = Process.GetProcessesByName("vrserver");
             if (SteamVR.Length > 0)
                 SteamVR_Running = true;
             else
-                SteamVR_Running = true;
+                SteamVR_Running = false;
         }
 
-        private bool Hovering_Normal_Button = false;
-        private DateTime Hover_Normal_Time;
 
-        private void btn_Normal_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Hovering_Normal_Button = true;
-            Hover_Normal_Time = DateTime.Now;
 
-            if (SteamVR_Running)
-                pb_Normal.Value = 1000;
-            else
-                pb_Normal.Value = 0;
-        }
-
-        private void btn_Normal_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Hovering_Normal_Button = false;
-            pb_Normal.Value = 0;
-        }
-
-        private void Check_Hover(object sender, EventArgs args)
-        {
-            if (SteamVR_Running)
-            {
-                if (Hovering_Normal_Button)
-                {
-                    TimeSpan Passed = DateTime.Now.Subtract(Hover_Normal_Time);
-                    if (Passed.TotalSeconds < 5)
-                        pb_Normal.Value = Passed.TotalMilliseconds;
-
-                    if (Passed.TotalSeconds >= 5)
-                    {
-                        Hovering_Normal_Button = false;
-
-                        pb_Normal.Value = 5000;
-                        pb_Normal.UpdateLayout();
-
-                        Point relativePoint = lbl_CurrentSetting.TransformToAncestor(this).Transform(new Point(0, 0));
-                        Point pt = new Point(relativePoint.X + lbl_CurrentSetting.ActualWidth / 2, relativePoint.Y + lbl_CurrentSetting.ActualHeight / 2);
-                        Point windowCenterPoint = pt;//new Point(125, 80);
-                        Point centerPointRelativeToSCreen = this.PointToScreen(windowCenterPoint);
-                        Functions.MoveCursor((int)centerPointRelativeToSCreen.X, (int)centerPointRelativeToSCreen.Y);
-
-                        btn_ActivateDash_Click(btn_Normal, null);
-                    }
-                }
-            }
-        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Dispatcher_Timer_Functions.StopTimer("SteamVR Checker");
+            Timer_Functions.StopTimer("SteamVR Checker");
         }
 
         private void lbl_ItsKaitlyn03_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -236,6 +206,129 @@ namespace OVR_Dash_Manager
             Properties.Settings.Default.Save();
 
             Topmost = Properties.Settings.Default.AlwaysOnTop;
+        }
+
+        private bool Hovering_Normal_Button = false;
+        private DateTime Hover_Normal_Time;
+
+        private void btn_Normal_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Hovering_Normal_Button = true;
+            Hover_Normal_Time = DateTime.Now;
+
+            if (SteamVR_Running)
+                pb_Normal.Value = 100;
+            else
+                pb_Normal.Value = 0;
+        }
+
+        private void btn_Normal_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Hovering_Normal_Button = false;
+            pb_Normal.Value = 0;
+        }
+
+
+        private bool Hovering_Exit_Button = false;
+        private DateTime Hover_Exit_Time;
+
+
+        private void btn_ExitOculusLink_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Hovering_Exit_Button = true;
+            Hover_Exit_Time = DateTime.Now;
+
+            if (SteamVR_Running)
+                pb_Exit.Value = 100;
+            else
+                pb_Exit.Value = 0;
+        }
+
+        private void btn_ExitOculusLink_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Hovering_Exit_Button = false;
+            pb_Exit.Value = 0;
+        }
+
+
+        private void Check_Hover(object sender, ElapsedEventArgs args)
+        {
+            if (SteamVR_Running)
+            {
+                bool MouseMouse = false;
+                bool ActivateNormal = false;
+                bool ActivateExit = false;
+
+                if (Hovering_Normal_Button)
+                {
+                    TimeSpan Passed = DateTime.Now.Subtract(Hover_Normal_Time);
+                    if (Passed.TotalSeconds < 5)
+                        Functions.DoAction(this, new Action(delegate () { pb_Normal.Value = Passed.TotalMilliseconds; }));
+
+                    if (Passed.TotalSeconds >= 5)
+                    {
+                        Functions.DoAction(this, new Action(delegate () { pb_Normal.Value = 5000; }));
+                        Hovering_Normal_Button = false;
+                        ActivateNormal = true;
+                        MouseMouse = true;
+                    }
+                }
+
+                if (Hovering_Exit_Button)
+                {
+                    TimeSpan Passed = DateTime.Now.Subtract(Hover_Exit_Time);
+                    if (Passed.TotalSeconds < 5)
+                        Functions.DoAction(this, new Action(delegate () { pb_Exit.Value = Passed.TotalMilliseconds; }));
+
+                    if (Passed.TotalSeconds >= 5)
+                    {
+                        Functions.DoAction(this, new Action(delegate () { pb_Exit.Value = 5000; }));
+                        Hovering_Exit_Button = false;
+                        ActivateExit = true;
+                        MouseMouse = true;
+                    }
+                }
+
+                if (MouseMouse)
+                {
+                    Functions.DoAction(this, new Action(delegate () {
+                        MoveMouseToElement(lbl_CurrentSetting);
+                    }));
+                }
+
+                if (ActivateNormal)
+                {
+                    Functions.DoAction(this, new Action(delegate () {
+                        pb_Normal.Value = 5000;
+                        pb_Normal.UpdateLayout();
+                        btn_ActivateDash_Click(btn_Normal, null);
+                    }));
+                }
+
+                if (ActivateExit)
+                {
+                    Functions.DoAction(this, new Action(delegate () {
+                        pb_Exit.Value = 5000;
+                        pb_Exit.UpdateLayout();
+                        btn_ActivateDash_Click(btn_ExitOculusLink, null);
+                    }));
+                }
+            }
+        }
+
+        private void MoveMouseToElement(FrameworkElement Element)
+        {
+            Point relativePoint = Element.TransformToAncestor(this).Transform(new Point(0, 0));
+            Point pt = new Point(relativePoint.X + Element.ActualWidth / 2, relativePoint.Y + Element.ActualHeight / 2);
+            Point windowCenterPoint = pt;//new Point(125, 80);
+            Point centerPointRelativeToSCreen = this.PointToScreen(windowCenterPoint);
+            Functions.MoveCursor((int)centerPointRelativeToSCreen.X, (int)centerPointRelativeToSCreen.Y);
+        }
+
+        private void btn_OpenDashLocation_Click(object sender, RoutedEventArgs e)
+        {
+            if (Oculus_Software.OculusInstalled)
+                Functions.ShowFileInDirectory(Oculus_Software.OculusDashFile);
         }
     }
 }
