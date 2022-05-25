@@ -13,6 +13,9 @@ Supports:<br>
 - Installing & Updating Oculus Killer  (https://github.com/ItsKaitlyn03/OculusKiller)  (To be improved)<br>
 - Switching between the dash boards while wearing headset<br>
 - Ability to exit SteamVR when using Oculus Killer and return to Quest Home<br>
+<br><br>
+!!! MUST RUN Oculus VR Dash Manager.exe AS ADMIN !!!<br>
+Oculus Directory & Oculus Services & SteamVR access needs Admin<br>
 <br>
 If you only want to use SteamVR you can run the program, let it install Oculus Killer and then click the corresponding button to switch and that's it you do not need to run my program every time.<br>
 <br>
