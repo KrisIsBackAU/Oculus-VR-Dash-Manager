@@ -1,6 +1,6 @@
 Oculus VR Dash Manager<br>
 <br>
-I love the Oculuskiller but as a person who owns both Oculus and Steam title I wanted a way to switch between on my PC and while wearing the headset.<br>
+I love the Oculus Killer but as a person who owns both Oculus and Steam title I wanted a way to switch between on my PC and while wearing the headset.<br>
 So I created: https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager<br>
 <br>
 You can change which dash you want before putting on the headset or even while wearing the headset.<br>
