@@ -4,6 +4,7 @@ I love the Oculus Killer but as a person who owns both Oculus and Steam title I 
 So I created: https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager<br>
 <br>
 Discord: https://discord.gg/ANeSUXRwgC<br>
+<br>Please request support / help in the above discord and not in OculusKiller (OpenOculus)'s Discord!<br>
 <br>
 You can change which dash you want before putting on the headset or even while wearing the headset.<br>
     *** SteamVR is VERY odd with Admin Programs (Hover for 5 Seconds) has been added to solve that.<br>
