@@ -3,6 +3,8 @@ Oculus VR Dash Manager<br>
 I love the Oculus Killer but as a person who owns both Oculus and Steam title I wanted a way to switch between on my PC and while wearing the headset.<br>
 So I created: https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager<br>
 <br>
+Discord: https://discord.gg/D9C7K5kJ<br>
+<br>
 You can change which dash you want before putting on the headset or even while wearing the headset.<br>
     *** SteamVR is VERY odd with Admin Programs (Hover for 5 Seconds) has been added to solve that.<br>
     *** Top Most is recommended and is default on as Focusing a Admin Program is also VERY odd in SteamVR<br><br>
