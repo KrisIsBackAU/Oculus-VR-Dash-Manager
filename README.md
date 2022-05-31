@@ -7,6 +7,8 @@ You can access the tool while wearing and not wearing any Oculus VR Headset that
 Discord: https://discord.gg/ANeSUXRwgC<br>
 Any request for features / help please ask in the above discord and not in OculusKiller (OpenOculus)'s Discord!<br>
 <br>
+[![Watch the video](https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Main.PNG)](https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager/blob/master/Dash%20Manager%20In%20Action.mkv?raw=true)
+<br>
 <img src="https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Diagnostics.PNG" />
 <img src="https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Settings.PNG" />
 <img src="https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Service Control.PNG" />
