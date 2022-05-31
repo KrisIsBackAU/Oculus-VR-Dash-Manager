@@ -15,7 +15,6 @@ https://user-images.githubusercontent.com/106002749/171194715-80b74894-7292-4557
 <img src="https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Settings.PNG" />
 <img src="https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Service Control.PNG" />
 <img src="https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Update Checker.PNG" />
-<img src="https://raw.githubusercontent.com/KrisIsBackAU/Oculus-VR-Dash-Manager/master/Main.PNG" />
 <br><br>
 You will also need to install .Net Core Desktop Apps.<br>
 When attempting to run the program will you be promoted to do so, please select the Desktop App version.<br>
