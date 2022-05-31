@@ -23,6 +23,22 @@ namespace OVR_Dash_Manager
             private set { _OculusDashFile = value; }
         }
 
+        private static string _OculusClientFile;
+
+        public static string OculusClientFile
+        {
+            get { return _OculusClientFile; }
+            private set { _OculusClientFile = value; }
+        }
+
+        private static string _OculusDebugTool;
+
+        public static string OculusDebugTool
+        {
+            get { return _OculusDebugTool; }
+            private set { _OculusDebugTool = value; }
+        }
+
         private static bool _OculusInstalled;
 
         public static bool OculusInstalled
@@ -64,6 +80,8 @@ namespace OVR_Dash_Manager
             if (Directory.Exists(OculusPath))
             {
                 _OculusDashDirectory = Path.Combine(OculusPath, @"Support\oculus-dash\dash\bin");
+                _OculusClientFile = Path.Combine(OculusPath, @"Support\oculus-client\OculusClient.exe");
+                _OculusDebugTool = Path.Combine(OculusPath, @"Support\oculus-diagnostics\OculusDebugTool.exe");
                 _OculusDashFile = Path.Combine(_OculusDashDirectory, @"OculusDash.exe");
             }
         }
@@ -120,6 +138,28 @@ namespace OVR_Dash_Manager
                 Legit = true;
 
             return Legit;
+        }
+
+        public static void StartOculusClient()
+        {
+            Process[] Dashes = Process.GetProcessesByName("OculusClient");
+
+            if (Dashes.Length == 0)
+                Process.Start(Oculus_Software._OculusClientFile);
+        }
+
+        public static void ResetLink()
+        {
+            if (Service_Manager.GetState("OVRService") == "Running")
+            {
+                SteamVR.ManagerCalledExit = true;
+
+                Service_Manager.StopService("OVRService");
+                Service_Manager.StartService("OVRService");
+
+                SteamVR.ManagerCalledExit = true;
+
+            }
         }
     }
 }

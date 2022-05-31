@@ -160,17 +160,64 @@ namespace OVR_Dash_Manager
         {
             SetCursorPos(X, Y);
         }
+
+        public static String RemoveStringFromEnd(String Text, String Remove)
+        {
+            if (Text.EndsWith(Remove))
+                Text = Text.Substring(0, Text.Length - Remove.Length);
+
+            return Text;
+        }
+
+        public static String RemoveStringFromStart(String Text, String Remove)
+        {
+            if (Text.StartsWith(Remove))
+                Text = Text.Substring(Remove.Length, Text.Length - Remove.Length);
+
+            return Text;
+        }
+
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
+        public static string GetActiveWindowTitle()
+        {
+            const int nChars = 256;
+            StringBuilder Buff = new StringBuilder(nChars);
+            IntPtr handle = GetForegroundWindow();
+
+            if (GetWindowText(handle, Buff, nChars) > 0)
+            {
+                return Buff.ToString();
+            }
+            return null;
+        }
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool BringWindowToTop(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SetFocus(IntPtr hWnd);
     }
+
     public static class Timer_Functions
     {
-        private static Dictionary<String, Timer> gTimers = null;
+        private static Dictionary<String, Timer> Timers = null;
         private static Boolean BeenSetup = false;
 
         private static void Setup()
         {
-            if (gTimers == null)
+            if (Timers == null)
             {
-                gTimers = new Dictionary<string, Timer>();
+                Timers = new Dictionary<string, Timer>();
                 BeenSetup = true;
             }
         }
@@ -180,12 +227,11 @@ namespace OVR_Dash_Manager
             if (!BeenSetup)
                 return false;
 
-
             Boolean pReturn = false;
 
-            if (gTimers.ContainsKey(pTimerID))
+            if (Timers.ContainsKey(pTimerID))
             {
-                Timer vTimer = gTimers[pTimerID];
+                Timer vTimer = Timers[pTimerID];
                 vTimer.Interval = pInterval.TotalMilliseconds;
                 pReturn = true;
             }
@@ -200,7 +246,7 @@ namespace OVR_Dash_Manager
 
             Boolean pReturn = false;
 
-            if (!gTimers.ContainsKey(pTimerID))
+            if (!Timers.ContainsKey(pTimerID))
             {
                 Timer vTimer = new Timer
                 {
@@ -212,7 +258,7 @@ namespace OVR_Dash_Manager
                 vTimer.Elapsed += pTickHandler;
                 vTimer.Start();
 
-                gTimers.Add(pTimerID, vTimer);
+                Timers.Add(pTimerID, vTimer);
 
                 pReturn = true;
             }
@@ -225,12 +271,11 @@ namespace OVR_Dash_Manager
             if (!BeenSetup)
                 return false;
 
-
             Boolean pReturn = false;
 
-            if (gTimers.ContainsKey(pTimerID))
+            if (Timers.ContainsKey(pTimerID))
             {
-                Timer vTimer = gTimers[pTimerID];
+                Timer vTimer = Timers[pTimerID];
                 vTimer.Enabled = true;
                 pReturn = true;
             }
@@ -243,12 +288,11 @@ namespace OVR_Dash_Manager
             if (!BeenSetup)
                 return false;
 
-
             Boolean pReturn = false;
 
-            if (gTimers.ContainsKey(pTimerID))
+            if (Timers.ContainsKey(pTimerID))
             {
-                Timer vTimer = gTimers[pTimerID];
+                Timer vTimer = Timers[pTimerID];
                 vTimer.Enabled = false;
                 pReturn = true;
             }
@@ -263,7 +307,7 @@ namespace OVR_Dash_Manager
 
             Boolean pReturn = false;
 
-            if (gTimers.ContainsKey(pTimerID))
+            if (Timers.ContainsKey(pTimerID))
                 pReturn = true;
 
             return pReturn;
@@ -271,10 +315,13 @@ namespace OVR_Dash_Manager
 
         public static void DisposeTimer(String pTimerID)
         {
-            if (gTimers.ContainsKey(pTimerID))
+            if (!BeenSetup)
+                return;
+
+            if (Timers.ContainsKey(pTimerID))
             {
-                Timer vTimer = gTimers[pTimerID];
-                gTimers.Remove(pTimerID);
+                Timer vTimer = Timers[pTimerID];
+                Timers.Remove(pTimerID);
 
                 vTimer.Stop();
             }
@@ -282,14 +329,16 @@ namespace OVR_Dash_Manager
 
         public static void DisposeAllTimers()
         {
-            foreach (KeyValuePair<String, Timer> oTimer in gTimers)
+            if (!BeenSetup)
+                return;
+
+            foreach (KeyValuePair<String, Timer> oTimer in Timers)
             {
                 oTimer.Value.Stop();
                 oTimer.Value.Dispose();
             }
 
-            gTimers.Clear();
+            Timers.Clear();
         }
     }
-
 }

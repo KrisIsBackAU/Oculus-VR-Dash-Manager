@@ -30,6 +30,20 @@ namespace OVR_Dash_Manager
             return Size;
         }
 
+        public string GetLatestReleaseName(String Repo, String Project)
+        {
+            String Name = "";
+
+            String JSON = Functions.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
+            if (JSON.Contains("browser_download_url"))
+            {
+                GitResponse Git = JsonConvert.DeserializeObject<GitResponse>(JSON);
+                Name = Git.name;
+            }
+
+            return Name;
+        }
+
         public long Download(String Repo, String Project, String AssetName, String FilePath)
         {
             long Size = 0;
@@ -52,9 +66,67 @@ namespace OVR_Dash_Manager
 
             return Size;
         }
+
+        public GitHub_Reply GetLatestReleaseInfo(String Repo, String Project)
+        {
+            GitHub_Reply Reply = null;
+
+            String JSON = Functions.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
+            if (JSON.Contains("browser_download_url"))
+            {
+                GitResponse Git = JsonConvert.DeserializeObject<GitResponse>(JSON);
+                if (Git.assets?.Count > 0)
+                {
+                    Dictionary<String, String> AssetURLs = new Dictionary<string, string>();
+
+                    foreach (Asset item in Git.assets)
+                    {
+                        if (!AssetURLs.ContainsKey(item.name))
+                            AssetURLs.Add(item.name, item.browser_download_url);
+                    }
+
+                    Reply = new GitHub_Reply(Git.name, Git.html_url, AssetURLs);
+                }
+            }
+
+            return Reply;
+        }
     }
 
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    public class GitHub_Reply
+    {
+        public GitHub_Reply(String Release_Version, String Release_URL, Dictionary<String, String> AssetURLs)
+        {
+            _Release_Version = Release_Version;
+            _Release_URL = Release_URL;
+            _AssetURLs = AssetURLs;
+        }
+
+        private string _Release_URL;
+
+        public string Release_URL
+        {
+            get { return _Release_URL; }
+            private set { _Release_URL = value; }
+        }
+
+        private string _Release_Version;
+
+        public string Release_Version
+        {
+            get { return _Release_Version; }
+            private set { _Release_Version = value; }
+        }
+
+        private Dictionary<String, String> _AssetURLs;
+
+        public Dictionary<String, String> AssetURLs
+        {
+            get { return _AssetURLs; }
+            private set { _AssetURLs = value; }
+        }
+    }
+
     internal class Asset
     {
         public string url { get; set; }

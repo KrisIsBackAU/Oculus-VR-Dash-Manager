@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.ServiceProcess;
 using System.Threading;
@@ -9,12 +10,24 @@ namespace OVR_Dash_Manager.Dashes
     {
         private static OVR_Dash Oculus_Dash;
         private static OVR_Dash SteamVR_Dash;
+        private static MainWindow MainForm;
+
+        public static void PassMainForm(MainWindow Form)
+        {
+            MainForm = Form;
+        }
+
+        public static void FocusMainForm()
+        {
+            if (MainForm != null)
+                Functions.DoAction(MainForm, new Action(delegate () { MainForm.Cancel_TaskView_And_Focus(); }));
+        }
 
         public static void GenerateDashes()
         {
             Oculus_Software.Check_Is_Installed();
 
-            Oculus_Dash = new OVR_Dash("Offical Oculus Dash", "OculusDash_Normal.exe", ProcessToStop: "vrserver.exe");
+            Oculus_Dash = new OVR_Dash("Offical Oculus Dash", "OculusDash_Normal.exe", ProcessToStop: "vrmonitor");
             SteamVR_Dash = new OVR_Dash("ItsKaitlyn03 - Oculus Killer", "ItsKaitlyn03_Oculus_Killer.exe", "Oculus Killer", "ItsKaitlyn03", "OculusKiller", "OculusDash.exe");
 
             CheckInstalled();
@@ -23,12 +36,9 @@ namespace OVR_Dash_Manager.Dashes
         private static void CheckInstalled()
         {
             Oculus_Dash.CheckInstalled();
-
             SteamVR_Dash.CheckInstalled();
 
             if (!SteamVR_Dash.Installed)
-                SteamVR_Dash.Download();
-            else if (!SteamVR_Dash.NeedUpdate)
                 SteamVR_Dash.Download();
 
             Oculus_Software.Check_Current_Dash();
@@ -79,11 +89,18 @@ namespace OVR_Dash_Manager.Dashes
             switch (Dash)
             {
                 case Dash_Type.Normal:
-                    Activated = Oculus_Dash.Activate_Dash();
+                    SteamVR.ManagerCalledExit = true;
+                    if (!Properties.Settings.Default.FastSwitch)
+                        Activated = Oculus_Dash.Activate_Dash();
+                    else
+                        Activated = Oculus_Dash.Activate_Dash_Fast_v2();
                     break;
 
                 case Dash_Type.OculusKiller:
-                    Activated = SteamVR_Dash.Activate_Dash();
+                    if (!Properties.Settings.Default.FastSwitch)
+                        Activated = SteamVR_Dash.Activate_Dash();
+                    else
+                        Activated = SteamVR_Dash.Activate_Dash_Fast_v2();
                     break;
 
                 default:
@@ -122,15 +139,57 @@ namespace OVR_Dash_Manager.Dashes
             }
         }
 
+        public static Boolean Activate_FastTransition(Dash_Type Dash)
+        {
+            Boolean Activated = false;
+
+            if (Dash != Dash_Type.Exit)
+            {
+                Debug.WriteLine("Starting Fast Activation: " + Dash.ToString());
+
+                for (int i = 0; i < 10; i++)
+                {
+                    if (AttemptFastSwitch(Dash))
+                        break;
+                }
+            }
+            else
+            {
+                ServiceController Service = new ServiceController("OVRService");
+                Boolean OVRServiceRunning = Running(Service.Status);
+
+                try
+                {
+                    Debug.WriteLine("Stopping OVRService");
+
+                    Service.Stop();
+                    if (OVRServiceRunning)
+                        Service.Start();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+            return Activated;
+        }
+
+        private static Boolean AttemptFastSwitch(Dash_Type Dash)
+        {
+            Boolean Activated = false;
+
+            Activated = SetActiveDash(Dash);
+
+            return Activated;
+        }
+
         public static Boolean Activate(Dash_Type Dash)
         {
-            Console.WriteLine("Starting Activation: " + Dash.ToString());
+            Debug.WriteLine("Starting Activation: " + Dash.ToString());
 
             Boolean Activated = false;
 
-            ServiceController sc = new ServiceController("OVRService");
-
-            Boolean OVRServiceRunning = Running(sc.Status);
+            Boolean OVRServiceRunning = (Service_Manager.GetState("OVRService") == "Running");
             Boolean OVRService_WasRunning = false;
             Boolean CanAccess = true;
 
@@ -139,44 +198,39 @@ namespace OVR_Dash_Manager.Dashes
                 OVRService_WasRunning = true;
                 try
                 {
-                    Console.WriteLine("Stopping OVRService");
-
-                    sc.Stop();
-                    Thread.Sleep(1000);
+                    Debug.WriteLine("Stopping OVRService");
+                    SteamVR.ManagerCalledExit = true;
+                    Service_Manager.StopService("OVRService");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.Message);
                     CanAccess = false;
                 }
             }
 
             if (CanAccess)
             {
-                Console.WriteLine("Checking OVRService");
+                Debug.WriteLine("Checking OVRService");
 
-                sc.Refresh();
-                sc.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromMinutes(1));
-
-                sc.Refresh();
-                OVRServiceRunning = Running(sc.Status);
+                OVRServiceRunning = (Service_Manager.GetState("OVRService") == "Running");
 
                 if (!OVRServiceRunning)
                 {
-                    Console.WriteLine("Activating Dash");
+                    Debug.WriteLine("Activating Dash");
                     Activated = SetActiveDash(Dash);
                 }
                 else
-                    Console.WriteLine("!!!!!! OVRService Can Not Be Stopped");
+                    Debug.WriteLine("!!!!!! OVRService Can Not Be Stopped");
 
                 if (OVRService_WasRunning)
                 {
-                    Console.WriteLine("Restarting OVRService");
-                    sc.Start();
+                    Debug.WriteLine("Restarting OVRService");
+                    Service_Manager.StartService("OVRService");
                 }
             }
             else
-                Console.WriteLine("!!!!!! OVRService Can Not Be Accessed");
+                Debug.WriteLine("!!!!!! OVRService Can Not Be Accessed");
 
             return Activated;
         }
@@ -204,10 +258,33 @@ namespace OVR_Dash_Manager.Dashes
                     return false;
             }
         }
-        
+
         public static bool Oculus_Offical_Dash_Installed()
         {
             return Oculus_Dash.Installed;
+        }
+
+        public static OVR_Dash GetDash(Dash_Type Dash)
+        {
+            switch (Dash)
+            {
+                case Dash_Type.Exit:
+                    break;
+
+                case Dash_Type.Unknown:
+                    break;
+
+                case Dash_Type.Normal:
+                    return Oculus_Dash;
+
+                case Dash_Type.OculusKiller:
+                    return SteamVR_Dash;
+
+                default:
+                    break;
+            }
+
+            return null;
         }
     }
 }

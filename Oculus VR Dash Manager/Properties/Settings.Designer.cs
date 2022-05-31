@@ -26,24 +26,84 @@ namespace OVR_Dash_Manager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool CheckUpdate {
-            get {
-                return ((bool)(this["CheckUpdate"]));
-            }
-            set {
-                this["CheckUpdate"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool AlwaysOnTop {
             get {
                 return ((bool)(this["AlwaysOnTop"]));
             }
             set {
                 this["AlwaysOnTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FastSwitch {
+            get {
+                return ((bool)(this["FastSwitch"]));
+            }
+            set {
+                this["FastSwitch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseOculusServicesOnExit {
+            get {
+                return ((bool)(this["CloseOculusServicesOnExit"]));
+            }
+            set {
+                this["CloseOculusServicesOnExit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RunOculusClientOnStartup {
+            get {
+                return ((bool)(this["RunOculusClientOnStartup"]));
+            }
+            set {
+                this["RunOculusClientOnStartup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SteamVRFocusFix {
+            get {
+                return ((bool)(this["SteamVRFocusFix"]));
+            }
+            set {
+                this["SteamVRFocusFix"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExitLinkOn_UserExit_SteamVR {
+            get {
+                return ((bool)(this["ExitLinkOn_UserExit_SteamVR"]));
+            }
+            set {
+                this["ExitLinkOn_UserExit_SteamVR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseOculusClientOnExit {
+            get {
+                return ((bool)(this["CloseOculusClientOnExit"]));
+            }
+            set {
+                this["CloseOculusClientOnExit"] = value;
             }
         }
     }

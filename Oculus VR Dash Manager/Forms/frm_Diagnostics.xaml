@@ -1,0 +1,49 @@
+﻿<Window x:Class="OVR_Dash_Manager.Forms.frm_Diagnostics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Diagnostics" Height="561" Width="430" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded" Closing="Window_Closing">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/MetroDark.MSControls.Core.Implicit.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#FF212121">
+        <Label Content="Oculus Software" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
+        <Label Content="Oculus Client" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" />
+        <Label Content="Oculus Libary Service" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" />
+        <Label Content="Oculus Runtime Service" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" />
+        <Label Content="Steam" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Height="28" Width="46" />
+        <Label Content="Steam VR" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" />
+        <Label Content="Current Dash" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" />
+        <Label Content="Offical Dash" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" />
+        <Label Content="ItsKaitlyn03 / OculusKiller" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_OculusSoftware" Content="Label" Margin="174,40,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_OculussClient" Content="Label" Margin="174,73,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_OculusLibaryService" Content="Label" Margin="174,106,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_OculusRuntimeService" Content="Label" Margin="174,139,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_Steam" Content="Label" Margin="174,172,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_SteamVR" Content="Label" Margin="174,205,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_CurrentDash" Content="Label" Margin="174,238,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_OfficalDash" Content="Label" Margin="174,271,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_OculusKiller" Content="Label" Margin="174,304,10,0" VerticalAlignment="Top" />
+        <Label Content="Last Check" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_DiagnosticsCheckTime" Content="Label" Margin="174,7,10,0" VerticalAlignment="Top" />
+        <ListView x:Name="lv_OculusDevices" Margin="10,0,10,10" Height="135" VerticalAlignment="Bottom">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Device Type" Width="250" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Serial" Width="125" DisplayMemberBinding="{Binding Serial}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Devices Detected" HorizontalAlignment="Left" Margin="10,0,0,157" VerticalAlignment="Bottom" />
+        <Button x:Name="btn_OculusDebugTool" Content="Oculus Debug Tool" HorizontalAlignment="Right" Margin="0,0,10,156" VerticalAlignment="Bottom" Width="170" Click="btn_OculusDebugTool_Click"/>
+    </Grid>
+</Window>
