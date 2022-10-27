@@ -1,0 +1,25 @@
+﻿<Window x:Class="OVR_Dash_Manager.Forms.frm_Help"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OVR_Dash_Manager.Forms"
+        mc:Ignorable="d"
+        Title="Help" Height="250" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Theme/MetroDark.MSControls.Core.Implicit.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#FF212121">
+        <Label Content="Visit Github Page" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <Button x:Name="btn_GitHub" Content="GitHub" HorizontalAlignment="Left" Margin="141,10,0,0" VerticalAlignment="Top" Height="28" Width="110" Click="btn_GitHub_Click" />
+        <Label Content="Visit Discord Server" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <Button x:Name="btn_Discord" Content="Discord" HorizontalAlignment="Left" Margin="141,56,0,0" VerticalAlignment="Top" Height="28" Width="110" Click="btn_Discord_Click" />
+        <TextBlock Text="Please do not post for help on the OpenOculus discord when the issue about the Dash Manager.&#10;&#10;Oculus VR Dash Manager is not associated/affiliated with that server." Margin="10,100,10,10" TextWrapping="Wrap" Foreground="White" Grid.ColumnSpan="2" />
+    </Grid>
+</Window>
