@@ -14,12 +14,12 @@ namespace OVR_Dash_Manager.Forms
 
         private void btn_GitHub_Click(object sender, RoutedEventArgs e)
         {
-            Functions.OpenURL("https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager");
+            Functions_Old.OpenURL("https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager");
         }
 
         private void btn_Discord_Click(object sender, RoutedEventArgs e)
         {
-            Functions.OpenURL("https://discord.gg/ANeSUXRwgC");
+            Functions_Old.OpenURL("https://discord.gg/ANeSUXRwgC");
         }
     }
 }

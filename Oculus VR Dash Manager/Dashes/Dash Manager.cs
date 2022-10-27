@@ -17,18 +17,35 @@ namespace OVR_Dash_Manager.Dashes
             MainForm = Form;
         }
 
-        public static void FocusMainForm()
+        public static void MainForm_FixTaskViewIssue()
         {
             if (MainForm != null)
-                Functions.DoAction(MainForm, new Action(delegate () { MainForm.Cancel_TaskView_And_Focus(); }));
+                Functions_Old.DoAction(MainForm, new Action(delegate () { MainForm.Cancel_TaskView_And_Focus(); }));
+        }
+
+        public static void MainForm_CheckRunTime()
+        {
+            if (MainForm != null)
+                Functions_Old.DoAction(MainForm, new Action(delegate () { MainForm.CheckRunTime(); }));
+        }
+
+        public static bool EmulateReleaseMode()
+        {
+            if (MainForm != null)
+                return MainForm.Debug_EmulateReleaseMode;
+            else
+                return false;
         }
 
         public static void GenerateDashes()
         {
-            Oculus_Software.Check_Is_Installed();
+            Software.Oculus.Check_Current_Dash();
 
             Oculus_Dash = new OVR_Dash("Offical Oculus Dash", "OculusDash_Normal.exe", ProcessToStop: "vrmonitor");
             SteamVR_Dash = new OVR_Dash("ItsKaitlyn03 - Oculus Killer", "ItsKaitlyn03_Oculus_Killer.exe", "Oculus Killer", "ItsKaitlyn03", "OculusKiller", "OculusDash.exe");
+
+            Software.Oculus.Setup();
+            Software.Oculus.Check_Oculus_Is_Installed();
 
             CheckInstalled();
         }
@@ -41,28 +58,28 @@ namespace OVR_Dash_Manager.Dashes
             if (!SteamVR_Dash.Installed)
                 SteamVR_Dash.Download();
 
-            Oculus_Software.Check_Current_Dash();
+            Software.Oculus.Check_Current_Dash();
 
             if (!Oculus_Dash.Installed)
             {
-                if (Oculus_Software.NormalDash)
+                if (Software.Oculus.Normal_Dash)
                 {
                     // Copy Default Oculus Dash if not already done
-                    File.Copy(Oculus_Software.OculusDashFile, Path.Combine(Oculus_Software.OculusDashDirectory, Oculus_Dash.DashFileName), true);
+                    File.Copy(Software.Oculus.Oculus_Dash_File, Path.Combine(Software.Oculus.Oculus_Dash_Directory, Oculus_Dash.DashFileName), true);
                     Oculus_Dash.CheckInstalled();
                 }
             }
             else
             {
                 // Check if Oculus Updated and check is Oculus Dash has changed by "Length"
-                if (Oculus_Software.NormalDash)
+                if (Software.Oculus.Normal_Dash)
                 {
-                    FileInfo CurrentDash = new FileInfo(Path.Combine(Oculus_Software.OculusDashDirectory, Oculus_Dash.DashFileName));
-                    FileInfo OculusDashFile = new FileInfo(Oculus_Software.OculusDashFile);
+                    FileInfo CurrentDash = new FileInfo(Path.Combine(Software.Oculus.Oculus_Dash_Directory, Oculus_Dash.DashFileName));
+                    FileInfo OculusDashFile = new FileInfo(Software.Oculus.Oculus_Dash_File);
 
                     // Update File
                     if (CurrentDash.Length != OculusDashFile.Length)
-                        File.Copy(Oculus_Software.OculusDashFile, Path.Combine(Oculus_Software.OculusDashDirectory, Oculus_Dash.DashFileName), true);
+                        File.Copy(Software.Oculus.Oculus_Dash_File, Path.Combine(Software.Oculus.Oculus_Dash_Directory, Oculus_Dash.DashFileName), true);
                 }
             }
         }
@@ -89,7 +106,7 @@ namespace OVR_Dash_Manager.Dashes
             switch (Dash)
             {
                 case Dash_Type.Normal:
-                    SteamVR.ManagerCalledExit = true;
+                    Software.Steam.ManagerCalledExit = true;
                     if (!Properties.Settings.Default.FastSwitch)
                         Activated = Oculus_Dash.Activate_Dash();
                     else
@@ -199,7 +216,7 @@ namespace OVR_Dash_Manager.Dashes
                 try
                 {
                     Debug.WriteLine("Stopping OVRService");
-                    SteamVR.ManagerCalledExit = true;
+                    Software.Steam.ManagerCalledExit = true;
                     Service_Manager.StopService("OVRService");
                 }
                 catch (Exception ex)

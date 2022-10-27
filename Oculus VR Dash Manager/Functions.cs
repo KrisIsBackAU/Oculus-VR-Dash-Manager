@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Timers;
@@ -13,7 +12,7 @@ using System.Windows.Threading;
 
 namespace OVR_Dash_Manager
 {
-    public static class Functions
+    public static class Functions_Old
     {
         public static void ShowFileInDirectory(String FullPath)
         {
@@ -112,7 +111,7 @@ namespace OVR_Dash_Manager
                 myWebClient.DownloadFile(pFullURL, pSaveTo);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -131,26 +130,6 @@ namespace OVR_Dash_Manager
         public static void DoAction(Window Form, Action DoAction)
         {
             Form.Dispatcher.Invoke(DoAction, DispatcherPriority.Normal);
-        }
-
-        public static Boolean IsCurrentProcess_Elevated()
-        {
-            WindowsIdentity vIdentity = GetWindowsIdentity();
-            WindowsPrincipal vPrincipal = GetWindowsPrincipal(vIdentity);
-
-            bool pReturn = vPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
-            vIdentity.Dispose();
-            return pReturn;
-        }
-
-        public static WindowsIdentity GetWindowsIdentity()
-        {
-            return WindowsIdentity.GetCurrent();
-        }
-
-        public static WindowsPrincipal GetWindowsPrincipal(WindowsIdentity pIdentity)
-        {
-            return new WindowsPrincipal(pIdentity);
         }
 
         [DllImport("User32.dll")]
@@ -176,7 +155,6 @@ namespace OVR_Dash_Manager
 
             return Text;
         }
-
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
@@ -206,6 +184,15 @@ namespace OVR_Dash_Manager
 
         [DllImport("user32.dll")]
         public static extern IntPtr SetFocus(IntPtr hWnd);
+    }
+
+    public enum RegistryKey_Type
+    {
+        ClassRoot = 0,
+        CurrentUser = 1,
+        LocalMachine = 2,
+        Users = 3,
+        CurrentConfig = 4
     }
 
     public static class Timer_Functions

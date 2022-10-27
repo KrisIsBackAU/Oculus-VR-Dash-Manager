@@ -85,7 +85,7 @@ namespace OVR_Dash_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ExitLinkOn_UserExit_SteamVR {
             get {
                 return ((bool)(this["ExitLinkOn_UserExit_SteamVR"]));
@@ -97,13 +97,37 @@ namespace OVR_Dash_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CloseOculusClientOnExit {
             get {
                 return ((bool)(this["CloseOculusClientOnExit"]));
             }
             set {
                 this["CloseOculusClientOnExit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Minimize_Oculus_Client_OnClientStart {
+            get {
+                return ((bool)(this["Minimize_Oculus_Client_OnClientStart"]));
+            }
+            set {
+                this["Minimize_Oculus_Client_OnClientStart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int Hover_Activation_Time {
+            get {
+                return ((int)(this["Hover_Activation_Time"]));
+            }
+            set {
+                this["Hover_Activation_Time"] = value;
             }
         }
     }

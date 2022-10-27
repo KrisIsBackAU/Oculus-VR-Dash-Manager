@@ -130,5 +130,25 @@ namespace OVR_Dash_Manager.Forms
         {
             Update_Properties_Setting(chkbx_ExitLink_OnUserClose_Steam.Tag.ToString(), false, chkbx_ExitLink_OnUserClose_Steam);
         }
+
+        private void chkbx_CloseOculusClientOnLaunch_Checked(object sender, RoutedEventArgs e)
+        {
+            Update_Properties_Setting(chkbx_CloseOculusClientOnLaunch.Tag.ToString(), true, chkbx_CloseOculusClientOnLaunch);
+        }
+
+        private void chkbx_CloseOculusClientOnLaunch_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Update_Properties_Setting(chkbx_CloseOculusClientOnLaunch.Tag.ToString(), false, chkbx_CloseOculusClientOnLaunch);
+        }
+
+        private void chkbx_MinimizeOculusClientOnClientLaunch_Checked(object sender, RoutedEventArgs e)
+        {
+            Update_Properties_Setting(chkbx_MinimizeOculusClientOnClientLaunch.Tag.ToString(), true, chkbx_MinimizeOculusClientOnClientLaunch);
+        }
+
+        private void chkbx_MinimizeOculusClientOnClientLaunch_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Update_Properties_Setting(chkbx_MinimizeOculusClientOnClientLaunch.Tag.ToString(), false, chkbx_MinimizeOculusClientOnClientLaunch);
+        }
     }
 }

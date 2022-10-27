@@ -33,6 +33,7 @@ namespace OVR_Dash_Manager
                 { "VID_2833&PID_0031", "Rift CV1" },
                 { "VID_2833&PID_0101", "Latency Tester" },
                 { "VID_2833&PID_0183", "Quest" },
+                { "VID_2833&PID_0182", "Quest" },
                 { "VID_2833&PID_0186", "Quest" },
                 { "VID_2833&PID_0083", "Quest" },
                 { "VID_2833&PID_0186&MI_00", "Quest XRSP" },
@@ -50,7 +51,7 @@ namespace OVR_Dash_Manager
                     String DeviceID = TryGetProperty(oDevice, "DeviceID").ToString();
                     String DeviceCaption = TryGetProperty(oDevice, "Caption").ToString();
 
-                    string[] Data = DeviceID.Split("\\");
+                    string[] Data = DeviceID.Split('\\');
                     string Type = "";
                     string Serial = "";
 
@@ -96,7 +97,7 @@ namespace OVR_Dash_Manager
             {
                 retval = wmiObj.GetPropertyValue(propertyName);
             }
-            catch (System.Management.ManagementException ex)
+            catch (System.Management.ManagementException)
             {
                 retval = null;
             }

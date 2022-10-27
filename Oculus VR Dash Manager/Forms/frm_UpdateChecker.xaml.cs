@@ -20,12 +20,12 @@ namespace OVR_Dash_Manager.Forms
 
         private void btn_DashManager_OpenWebsite_Click(object sender, RoutedEventArgs e)
         {
-            Functions.OpenURL("https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager");
+            Functions_Old.OpenURL("https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager");
         }
 
         private void btn_ItsKaitlyn03_OpenWebsite_Click(object sender, RoutedEventArgs e)
         {
-            Functions.OpenURL("https://github.com/ItsKaitlyn03/OculusKiller");
+            Functions_Old.OpenURL("https://github.com/ItsKaitlyn03/OculusKiller");
         }
 
         private void Thread_CheckUpdates()
@@ -39,7 +39,7 @@ namespace OVR_Dash_Manager.Forms
             Github Check = new Github();
             String Version = Check.GetLatestReleaseName("KrisIsBackAU", "Oculus-VR-Dash-Manager");
             String CurrentVersion = typeof(MainWindow).Assembly.GetName().Version.ToString();
-            Functions.DoAction(this, new Action(delegate () { lbl_DashManager_LastCheck.Content = DateTime.Now.ToString(); lbl_DashManager_CurrentVersion.Content = CurrentVersion; lbl_DashManager_AvaliableVersion.Content = Version; }));
+            Functions_Old.DoAction(this, new Action(delegate () { lbl_DashManager_LastCheck.Content = DateTime.Now.ToString(); lbl_DashManager_CurrentVersion.Content = CurrentVersion; lbl_DashManager_AvaliableVersion.Content = Version; }));
         }
 
         private void Check_ItsKaitlyn03_Update()
@@ -47,21 +47,21 @@ namespace OVR_Dash_Manager.Forms
             Dashes.OVR_Dash ItsKaitlyn03 = Dashes.Dash_Manager.GetDash(Dashes.Dash_Type.OculusKiller);
 
             if (ItsKaitlyn03 == null)
-                Functions.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_CurrentVersion.Content = "Not Loaded"; }));
+                Functions_Old.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_CurrentVersion.Content = "Not Loaded"; }));
             else if (!ItsKaitlyn03.Installed)
-                Functions.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_CurrentVersion.Content = "Not Downloaded"; }));
+                Functions_Old.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_CurrentVersion.Content = "Not Downloaded"; }));
             else
             {
-                FileVersionInfo Info = FileVersionInfo.GetVersionInfo(Path.Combine(Oculus_Software.OculusDashDirectory, ItsKaitlyn03.DashFileName));
-                Functions.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_CurrentVersion.Content = Info.FileVersion; }));
+                FileVersionInfo Info = FileVersionInfo.GetVersionInfo(Path.Combine(Software.Oculus.Oculus_Dash_Directory, ItsKaitlyn03.DashFileName));
+                Functions_Old.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_CurrentVersion.Content = Info.FileVersion; }));
             }
 
             Github Check = new Github();
             ItsKaitlyn03_GitHub = Check.GetLatestReleaseInfo("ItsKaitlyn03", "OculusKiller");
-            Functions.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_LastCheck.Content = DateTime.Now.ToString(); lbl_ItsKaitlyn03_AvaliableVersion.Content = ItsKaitlyn03_GitHub.Release_Version; }));
+            Functions_Old.DoAction(this, new Action(delegate () { lbl_ItsKaitlyn03_LastCheck.Content = DateTime.Now.ToString(); lbl_ItsKaitlyn03_AvaliableVersion.Content = ItsKaitlyn03_GitHub.Release_Version; }));
 
             if (ItsKaitlyn03_GitHub.AssetURLs.ContainsKey("OculusDash.exe"))
-                Functions.DoAction(this, new Action(delegate () { btn_ItsKaitlyn03_Download.IsEnabled = true; }));
+                Functions_Old.DoAction(this, new Action(delegate () { btn_ItsKaitlyn03_Download.IsEnabled = true; }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

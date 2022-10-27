@@ -16,6 +16,8 @@
     </Window.Resources>
 
     <Grid Background="#FF212121">
-        <TextBox x:Name="txtbx_ReadOut" Text="Start Test UI" TextWrapping="Wrap" Margin="10,10,10,10"/>
+        <TextBox x:Name="txtbx_ReadOut" Text="Start Test UI" TextWrapping="Wrap" Margin="10,10,10,50"/>
+        <Button x:Name="btn_ChangeSteamRunTime" Content="Swtich SteamVR Runtime" Margin="10,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="195" Click="btn_ChangeSteamRunTime_Click"/>
+        <Button x:Name="btn_ChangeOculusRunTime" Content="Swtich Oculus Runtime" Margin="224,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="195" Click="btn_ChangeOculusRunTime_Click"/>
     </Grid>
 </Window>

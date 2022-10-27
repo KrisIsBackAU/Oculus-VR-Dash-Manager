@@ -38,7 +38,7 @@ namespace OVR_Dash_Manager.Forms
 
         private void CallCheckServices(object sender, ElapsedEventArgs args)
         {
-            Functions.DoAction(this, new Action(delegate () { CheckServices(); }));
+            Functions_Old.DoAction(this, new Action(delegate () { CheckServices(); }));
         }
 
         private void CheckServices()

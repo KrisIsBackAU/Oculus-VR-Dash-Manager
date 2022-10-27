@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Timers;
@@ -20,7 +21,7 @@ namespace OVR_Dash_Manager.Forms
 
         private void AddToReadOut(String Text)
         {
-            Functions.DoAction(this, new Action(delegate () { txtbx_ReadOut.AppendText(Text + "\r\n"); txtbx_ReadOut.ScrollToEnd(); }));
+            Functions_Old.DoAction(this, new Action(delegate () { txtbx_ReadOut.AppendText(Text + "\r\n"); txtbx_ReadOut.ScrollToEnd(); }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -38,6 +39,16 @@ namespace OVR_Dash_Manager.Forms
         private void Test_Function(object sender, ElapsedEventArgs args)
         {
 
+        }
+
+        private void btn_ChangeSteamRunTime_Click(object sender, RoutedEventArgs e)
+        {
+            Software.Steam_VR_Settings.Set_SteamVR_Runtime();
+        }
+
+        private void btn_ChangeOculusRunTime_Click(object sender, RoutedEventArgs e)
+        {
+            Software.Oculus_Link.SetToOculusRunTime();
         }
     }
 }

@@ -76,9 +76,9 @@ namespace OVR_Dash_Manager.Dashes
 
         public void CheckInstalled()
         {
-            if (Directory.Exists(Oculus_Software.OculusDashDirectory))
+            if (Directory.Exists(Software.Oculus.Oculus_Dash_Directory))
             {
-                String DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName);
+                String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
 
                 if (File.Exists(DashPath))
                     _Installed = true;
@@ -91,7 +91,7 @@ namespace OVR_Dash_Manager.Dashes
             {
                 if (!String.IsNullOrEmpty(RepoName) && !String.IsNullOrEmpty(ProjectName) && !String.IsNullOrEmpty(AssetName))
                 {
-                    String DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName);
+                    String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
                     FileInfo CurrentDash = new FileInfo(DashPath);
                     _Size = CurrentDash.Length;
 
@@ -106,8 +106,8 @@ namespace OVR_Dash_Manager.Dashes
 
         public void Download()
         {
-            String Temp_DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName + ".tmp");
-            String DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName);
+            String Temp_DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName + ".tmp");
+            String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
             Boolean Active_NeedUpdateTo = false;
             Boolean ShouldUpdate = true;
 
@@ -116,7 +116,7 @@ namespace OVR_Dash_Manager.Dashes
                 try
                 {
                     // try and remove live version of this dash (we always have our backup incase)
-                    File.Delete(Oculus_Software.OculusDashFile);
+                    File.Delete(Software.Oculus.Oculus_Dash_File);
                     Active_NeedUpdateTo = true;
                 }
                 catch (Exception)
@@ -140,11 +140,11 @@ namespace OVR_Dash_Manager.Dashes
                 {
                     try
                     {
-                        File.Move(Temp_DashPath, DashPath, true);
+                        File.Move(Temp_DashPath, DashPath);
                         _Installed = true;
 
                         if (Active_NeedUpdateTo)
-                            File.Copy(DashPath, Oculus_Software.OculusDashFile, true);
+                            File.Copy(DashPath, Software.Oculus.Oculus_Dash_File, true);
                     }
                     catch (Exception ex)
                     {
@@ -156,8 +156,8 @@ namespace OVR_Dash_Manager.Dashes
 
             if (_DashActive)
             {
-                if (!File.Exists(Oculus_Software.OculusDashFile))
-                    File.Copy(DashPath, Oculus_Software.OculusDashFile, true); // Copy backup file back incase something failed above
+                if (!File.Exists(Software.Oculus.Oculus_Dash_File))
+                    File.Copy(DashPath, Software.Oculus.Oculus_Dash_File, true); // Copy backup file back incase something failed above
             }
         }
 
@@ -182,11 +182,11 @@ namespace OVR_Dash_Manager.Dashes
                     throw;
                 }
 
-                String DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName);
+                String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
 
                 try
                 {
-                    Activated = SwitchFiles(DashPath, Oculus_Software.OculusDashFile);
+                    Activated = SwitchFiles(DashPath, Software.Oculus.Oculus_Dash_File);
                 }
                 catch (Exception ex)
                 {
@@ -217,11 +217,11 @@ namespace OVR_Dash_Manager.Dashes
                     }
                 }
 
-                String DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName);
+                String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
 
                 try
                 {
-                    Activated = SwitchFiles(DashPath, Oculus_Software.OculusDashFile);
+                    Activated = SwitchFiles(DashPath, Software.Oculus.Oculus_Dash_File);
                 }
                 catch (Exception ex)
                 {
@@ -255,19 +255,19 @@ namespace OVR_Dash_Manager.Dashes
 
             if (Installed)
             {
-                String DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName);
+                String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
 
                 try
                 {
-                    if (File.Exists(Oculus_Software.OculusDashFile))
+                    if (File.Exists(Software.Oculus.Oculus_Dash_File))
                     {
                         Debug.WriteLine("Moving Active Dash");
 
-                        File.Move(Oculus_Software.OculusDashFile, $"{Oculus_Software.OculusDashFile}.delete", true);
+                        File.Move(Software.Oculus.Oculus_Dash_File, $"{Software.Oculus.Oculus_Dash_File}.delete");
                     }
 
                     Debug.WriteLine("Switching in New Dash");
-                    Activated = SwitchFiles(DashPath, Oculus_Software.OculusDashFile);
+                    Activated = SwitchFiles(DashPath, Software.Oculus.Oculus_Dash_File);
                 }
                 catch (Exception ex)
                 {
@@ -286,10 +286,10 @@ namespace OVR_Dash_Manager.Dashes
                         Debug.WriteLine("Killing Dash: " + RunningDash.Id);
                         RunningDash.Kill();
 
-                        if (File.Exists($"{Oculus_Software.OculusDashFile}.delete"))
+                        if (File.Exists($"{Software.Oculus.Oculus_Dash_File}.delete"))
                         {
                             RunningDash.WaitForExit();
-                            File.Delete($"{Oculus_Software.OculusDashFile}.delete");
+                            File.Delete($"{Software.Oculus.Oculus_Dash_File}.delete");
                             Debug.WriteLine("Removed Old Dash File");
                         }
                     }
@@ -297,9 +297,9 @@ namespace OVR_Dash_Manager.Dashes
 
                 try
                 {
-                    if (File.Exists($"{Oculus_Software.OculusDashFile}.delete"))
+                    if (File.Exists($"{Software.Oculus.Oculus_Dash_File}.delete"))
                     {
-                        File.Delete($"{Oculus_Software.OculusDashFile}.delete");
+                        File.Delete($"{Software.Oculus.Oculus_Dash_File}.delete");
                         Debug.WriteLine("Removed Old Dash File");
                     }
                 }
@@ -330,7 +330,7 @@ namespace OVR_Dash_Manager.Dashes
         {
             bool Activated = false;
             
-            String DashPath = Path.Combine(Oculus_Software.OculusDashDirectory, DashFileName);
+            String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
             if (File.Exists(NewFile))
             {
                 File.Copy(NewFile, OldFile, true);

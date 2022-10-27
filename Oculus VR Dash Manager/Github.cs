@@ -10,7 +10,7 @@ namespace OVR_Dash_Manager
         {
             long Size = 0;
 
-            String JSON = Functions.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
+            String JSON = Functions_Old.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
             if (JSON.Contains("browser_download_url"))
             {
                 GitResponse Git = JsonConvert.DeserializeObject<GitResponse>(JSON);
@@ -34,7 +34,7 @@ namespace OVR_Dash_Manager
         {
             String Name = "";
 
-            String JSON = Functions.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
+            String JSON = Functions_Old.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
             if (JSON.Contains("browser_download_url"))
             {
                 GitResponse Git = JsonConvert.DeserializeObject<GitResponse>(JSON);
@@ -48,7 +48,7 @@ namespace OVR_Dash_Manager
         {
             long Size = 0;
 
-            String JSON = Functions.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
+            String JSON = Functions_Old.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
             if (JSON.Contains("browser_download_url"))
             {
                 GitResponse Git = JsonConvert.DeserializeObject<GitResponse>(JSON);
@@ -58,7 +58,7 @@ namespace OVR_Dash_Manager
                     {
                         if (item.name == AssetName)
                         {
-                            Functions.Get_File(item.browser_download_url, FilePath);
+                            Functions_Old.Get_File(item.browser_download_url, FilePath);
                         }
                     }
                 }
@@ -71,7 +71,7 @@ namespace OVR_Dash_Manager
         {
             GitHub_Reply Reply = null;
 
-            String JSON = Functions.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
+            String JSON = Functions_Old.GetPageHTML($"https://api.github.com/repos/{Repo}/{Project}/releases/latest");
             if (JSON.Contains("browser_download_url"))
             {
                 GitResponse Git = JsonConvert.DeserializeObject<GitResponse>(JSON);

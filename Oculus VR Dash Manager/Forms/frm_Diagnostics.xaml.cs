@@ -32,16 +32,16 @@ namespace OVR_Dash_Manager.Forms
 
         private void CallDiagnosticsChecker(object sender, ElapsedEventArgs args)
         {
-            Functions.DoAction(this, new Action(delegate () { DiagnosticsChecker(); }));
+            Functions_Old.DoAction(this, new Action(delegate () { DiagnosticsChecker(); }));
         }
 
         private void DiagnosticsChecker()
         {
-            lbl_OculusSoftware.Content = Oculus_Software.OculusInstalled ? "Installed" : "Not Found";
+            lbl_OculusSoftware.Content = Software.Oculus.Oculus_Is_Installed ? "Installed" : "Not Found";
 
-            if (!String.IsNullOrEmpty(Oculus_Software.OculusClientFile))
+            if (!String.IsNullOrEmpty(Software.Oculus.Oculus_Client_EXE))
             {
-                if (File.Exists(Oculus_Software.OculusClientFile))
+                if (File.Exists(Software.Oculus.Oculus_Client_EXE))
                     lbl_OculussClient.Content = "Installed";
                 else
                     lbl_OculussClient.Content = "Not Found";
@@ -52,25 +52,33 @@ namespace OVR_Dash_Manager.Forms
             lbl_OfficalDash.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.Normal) ? "Installed" : "Not Found";
             lbl_OculusKiller.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.Normal) ? "Installed" : "Not Found";
 
-            FileVersionInfo Info = FileVersionInfo.GetVersionInfo(Oculus_Software.OculusDashFile);
+            FileVersionInfo Info = FileVersionInfo.GetVersionInfo(Software.Oculus.Oculus_Dash_File);
             Dashes.Dash_Type Current = Dashes.Dash_Manager.CheckWhosDash(Info.ProductName);
             lbl_CurrentDash.Content = Dashes.Dash_Manager.GetDashName(Current);
 
             lbl_OculusLibaryService.Content = $"State: {Service_Manager.GetState("OVRService")} - Startup: {Service_Manager.GetStartup("OVRService")}";
             lbl_OculusRuntimeService.Content = $"State: {Service_Manager.GetState("OVRService")} - Startup: {Service_Manager.GetStartup("OVRService")}";
 
-            lbl_SteamVR.Content = $"{(SteamVR.SteamVR_Installed ? "Installed" : "Not Found")} - {(SteamVR.SteamVR_Running ? "Running" : "Not Started")}";
-            lbl_Steam.Content = $"{(SteamVR.Steam_Installed ? "Installed" : "Not Found")}";
+            lbl_Steam.Content = $"{(Software.Steam.Steam_Installed ? "Installed" : "Not Found")}";
+            lbl_SteamVR.Content = $"{(Software.Steam.Steam_VR_Installed ? "Installed" : "Not Found")} - {(Software.Steam.Steam_VR_Server_Running ? "Running" : "Not Started")}";
 
             lbl_DiagnosticsCheckTime.Content = DateTime.Now.ToString();
 
             lv_OculusDevices.ItemsSource = USB_Devices_Functions.GetUSBDevices();
+
+            Software.Steam_VR_Settings.OpenXR_Runtime CurrentRuntime = Software.Steam_VR_Settings.Read_Runtime();
+
+            if (CurrentRuntime == Software.Steam_VR_Settings.OpenXR_Runtime.Oculus)
+                lbl_OpenXR_RunTime.Content = "Oculus Runtime";
+
+            if (CurrentRuntime == Software.Steam_VR_Settings.OpenXR_Runtime.SteamVR)
+                lbl_OpenXR_RunTime.Content = "SteamVR Runtime";
         }
 
         private void btn_OculusDebugTool_Click(object sender, RoutedEventArgs e)
         {
-            if (File.Exists(Oculus_Software.OculusDebugTool))
-                Process.Start(Oculus_Software.OculusDebugTool);
+            if (File.Exists(Software.Oculus.Oculus_DebugTool_EXE))
+                Process.Start(Software.Oculus.Oculus_DebugTool_EXE);
         }
     }
 }

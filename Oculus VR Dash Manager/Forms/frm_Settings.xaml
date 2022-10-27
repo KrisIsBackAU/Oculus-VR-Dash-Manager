@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Settings" Height="305" Width="866" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Settings" Height="370" Width="905" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,11 +23,13 @@
         <Label Content="Close Oculus Services when Manager Exits (Only when Services set to Manual Startup)" HorizontalAlignment="Left" Margin="340,84,0,0" VerticalAlignment="Top" Height="30" />
         <CheckBox x:Name="chkbx_StartOculusClientOnLaunch" Content="Start Oculus Client on Manager Launch" HorizontalAlignment="Left" Margin="10,119,0,0" Width="300" Checked="chkbx_StartOculusClientOnLaunch_Checked" Unchecked="chkbx_StartOculusClientOnLaunch_Unchecked" Height="16" VerticalAlignment="Top" Tag="RunOculusClientOnStartup" />
         <Label Content="Start Oculus Client when Manager Starts" HorizontalAlignment="Left" Margin="336,119,0,0" VerticalAlignment="Top" Height="30" />
-        <CheckBox x:Name="chkbx_SteamVRFocusFix" Content="Check for SteamVR Admin Program Focus Issue" HorizontalAlignment="Left" Margin="10,189,0,0" Width="350" Checked="chkbx_SteamVRFocusFix_Checked" Unchecked="chkbx_SteamVRFocusFix_Unchecked" Height="16" VerticalAlignment="Top" Tag="SteamVRFocusFix" />
-        <Label Content="Lets the Manager Fix SteamVR Admin Program Focus Issue When it Occurs" HorizontalAlignment="Left" Margin="379,189,0,0" VerticalAlignment="Top" Height="30" Width="464" />
-        <CheckBox x:Name="chkbx_ExitLink_OnUserClose_Steam" Content="Exit Link on User Exit Steam VR" HorizontalAlignment="Left" Margin="10,224,0,0" Width="267" Checked="chkbx_ExitLink_OnUserClose_Steam_Checked" Unchecked="chkbx_ExitLink_OnUserClose_Steam_Unchecked" Height="16" VerticalAlignment="Top" Tag="ExitLinkOn_UserExit_SteamVR" />
-        <Label Content="Exit Oculus Link when User Closes Steam VR (Stable Link Connection Recommended)" HorizontalAlignment="Left" Margin="300,224,0,0" VerticalAlignment="Top" Height="30" Width="514" />
-        <CheckBox x:Name="chkbx_StartOculusClientOnLaunch_Copy" Content="Close Oculus Client on Manager Exit" HorizontalAlignment="Left" Margin="10,154,0,0" Width="300" Checked="chkbx_StartOculusClientOnLaunch_Checked" Unchecked="chkbx_StartOculusClientOnLaunch_Unchecked" Height="16" VerticalAlignment="Top" Tag="CloseOculusClientOnExit" />
+        <CheckBox x:Name="chkbx_SteamVRFocusFix" Content="Check for SteamVR Admin Program Focus Issue" HorizontalAlignment="Left" Margin="10,224,0,0" Width="350" Checked="chkbx_SteamVRFocusFix_Checked" Unchecked="chkbx_SteamVRFocusFix_Unchecked" Height="16" VerticalAlignment="Top" Tag="SteamVRFocusFix" />
+        <Label Content="Lets the Manager Fix SteamVR Admin Program Focus Issue When it Occurs" HorizontalAlignment="Left" Margin="379,224,0,0" VerticalAlignment="Top" Height="30" Width="464" />
+        <CheckBox x:Name="chkbx_ExitLink_OnUserClose_Steam" Content="Exit Link on User Exit Steam VR" HorizontalAlignment="Left" Margin="9,259,0,0" Width="267" Checked="chkbx_ExitLink_OnUserClose_Steam_Checked" Unchecked="chkbx_ExitLink_OnUserClose_Steam_Unchecked" Height="16" VerticalAlignment="Top" Tag="ExitLinkOn_UserExit_SteamVR" />
+        <Label Content="Exit Oculus Link when User Closes Steam VR (Stable Link Connection Recommended)" HorizontalAlignment="Left" Margin="299,259,0,0" VerticalAlignment="Top" Height="30" Width="514" />
+        <CheckBox x:Name="chkbx_CloseOculusClientOnLaunch" Content="Close Oculus Client on Manager Exit" HorizontalAlignment="Left" Margin="10,154,0,0" Width="300" Checked="chkbx_CloseOculusClientOnLaunch_Checked" Unchecked="chkbx_CloseOculusClientOnLaunch_Unchecked" Height="16" VerticalAlignment="Top" Tag="CloseOculusClientOnExit" />
         <Label Content="Close Oculus Client when Manager Exits" HorizontalAlignment="Left" Margin="336,154,0,0" VerticalAlignment="Top" Height="30" />
+        <CheckBox x:Name="chkbx_MinimizeOculusClientOnClientLaunch" Content="Minimize Oculus Client on Client Launch" HorizontalAlignment="Left" Margin="10,189,0,0" Width="300" Checked="chkbx_MinimizeOculusClientOnClientLaunch_Checked" Unchecked="chkbx_MinimizeOculusClientOnClientLaunch_Unchecked" Height="16" VerticalAlignment="Top" Tag="Minimize_Oculus_Client_OnClientStart" />
+        <Label Content="Minimize Oculus Client when Oculus Client Starts" HorizontalAlignment="Left" Margin="336,189,0,0" VerticalAlignment="Top" Height="30" />
     </Grid>
 </Window>
