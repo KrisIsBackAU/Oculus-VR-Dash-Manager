@@ -20,7 +20,7 @@
         <Label x:Name="lbl_CurrentSetting" Content="Unknown" Margin="10,254,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Height="45" VerticalAlignment="Top" />
         <GroupBox Header="Dashes" Margin="10,42,10,0" Height="171" VerticalAlignment="Top">
             <Grid x:Name="gd_DashButtons">
-                <Button x:Name="btn_Normal" Content="Offical Dash&#10;&#10;(SteamVR)&#10;Hover to activate" HorizontalAlignment="Left" Width="200" Margin="0,0,0,23" Click="btn_ActivateDash_Click" MouseEnter="btn_Normal_MouseEnter" MouseLeave="btn_Normal_MouseLeave" BorderBrush="#FF515151" />
+                <Button x:Name="btn_Normal" Content="Official Dash&#10;&#10;(SteamVR)&#10;Hover to activate" HorizontalAlignment="Left" Width="200" Margin="0,0,0,23" Click="btn_ActivateDash_Click" MouseEnter="btn_Normal_MouseEnter" MouseLeave="btn_Normal_MouseLeave" BorderBrush="#FF515151" />
                 <ProgressBar x:Name="pb_Normal" HorizontalAlignment="Left" Width="200" Maximum="5000" SmallChange="10" Height="23" VerticalAlignment="Bottom" />
                 <Label x:Name="lbl_ItsKaitlyn03" Content="Visit ItsKaitlyn03 (Github)" HorizontalAlignment="Left" Width="200" Height="32" VerticalAlignment="Bottom" FontSize="12" HorizontalContentAlignment="Right" Cursor="Hand" PreviewMouseDown="lbl_ItsKaitlyn03_PreviewMouseDown" VerticalContentAlignment="Bottom" Margin="225,0,0,0" />
                 <Button x:Name="btn_SteamVR" Content="ItsKaitlyn03 / OculusKiller&#10;&#10;(SteamVR Mode Only)" HorizontalAlignment="Left" Width="200" Click="btn_ActivateDash_Click" Margin="225,0,0,23" />

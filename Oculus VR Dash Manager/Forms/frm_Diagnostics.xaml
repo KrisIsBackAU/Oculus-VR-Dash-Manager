@@ -22,7 +22,7 @@
         <Label Content="Steam" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Height="28" Width="46" />
         <Label Content="Steam VR" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" />
         <Label Content="Current Dash" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" />
-        <Label Content="Offical Dash" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" />
+        <Label Content="Official Dash" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top" />
         <Label Content="ItsKaitlyn03 / OculusKiller" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" />
         <Label x:Name="lbl_OculusSoftware" Content="Label" Margin="174,40,10,0" VerticalAlignment="Top" />
         <Label x:Name="lbl_OculussClient" Content="Label" Margin="174,73,10,0" VerticalAlignment="Top" />
@@ -31,7 +31,7 @@
         <Label x:Name="lbl_Steam" Content="Label" Margin="174,172,10,0" VerticalAlignment="Top" />
         <Label x:Name="lbl_SteamVR" Content="Label" Margin="174,205,10,0" VerticalAlignment="Top" />
         <Label x:Name="lbl_CurrentDash" Content="Label" Margin="174,238,10,0" VerticalAlignment="Top" />
-        <Label x:Name="lbl_OfficalDash" Content="Label" Margin="174,271,10,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_OfficialDash" Content="Label" Margin="174,271,10,0" VerticalAlignment="Top" />
         <Label x:Name="lbl_OculusKiller" Content="Label" Margin="174,304,10,0" VerticalAlignment="Top" />
         <Label Content="Last Check" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" />
         <Label x:Name="lbl_DiagnosticsCheckTime" Content="Label" Margin="174,7,10,0" VerticalAlignment="Top" />

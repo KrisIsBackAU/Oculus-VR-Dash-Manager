@@ -49,7 +49,7 @@ namespace OVR_Dash_Manager.Forms
             else
                 lbl_OculussClient.Content = "Not Found";
 
-            lbl_OfficalDash.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.Normal) ? "Installed" : "Not Found";
+            lbl_OfficialDash.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.Normal) ? "Installed" : "Not Found";
             lbl_OculusKiller.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.Normal) ? "Installed" : "Not Found";
 
             FileVersionInfo Info = FileVersionInfo.GetVersionInfo(Software.Oculus.Oculus_Dash_File);

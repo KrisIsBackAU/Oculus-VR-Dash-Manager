@@ -85,9 +85,9 @@ namespace OVR_Dash_Manager
                     return;
                 }
 
-                if (!Dashes.Dash_Manager.Oculus_Offical_Dash_Installed())
+                if (!Dashes.Dash_Manager.Oculus_Official_Dash_Installed())
                 {
-                    Functions_Old.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Offical Oculus Dash Not Found, Replace Original Oculus Dash"; }));
+                    Functions_Old.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Official Oculus Dash Not Found, Replace Original Oculus Dash"; }));
                     return;
                 }
 

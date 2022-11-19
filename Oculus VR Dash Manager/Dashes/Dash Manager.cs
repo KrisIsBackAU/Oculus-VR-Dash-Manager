@@ -41,7 +41,7 @@ namespace OVR_Dash_Manager.Dashes
         {
             Software.Oculus.Check_Current_Dash();
 
-            Oculus_Dash = new OVR_Dash("Offical Oculus Dash", "OculusDash_Normal.exe", ProcessToStop: "vrmonitor");
+            Oculus_Dash = new OVR_Dash("Official Oculus Dash", "OculusDash_Normal.exe", ProcessToStop: "vrmonitor");
             SteamVR_Dash = new OVR_Dash("ItsKaitlyn03 - Oculus Killer", "ItsKaitlyn03_Oculus_Killer.exe", "Oculus Killer", "ItsKaitlyn03", "OculusKiller", "OculusDash.exe");
 
             Software.Oculus.Setup();
@@ -276,7 +276,7 @@ namespace OVR_Dash_Manager.Dashes
             }
         }
 
-        public static bool Oculus_Offical_Dash_Installed()
+        public static bool Oculus_Official_Dash_Installed()
         {
             return Oculus_Dash.Installed;
         }

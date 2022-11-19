@@ -159,7 +159,7 @@ namespace OVR_Dash_Manager.Software
                     _Custom_Dash = true;
                 else
                 {
-                    if (Check_Is_OfficalDash(FilePath))
+                    if (Check_Is_OfficialDash(FilePath))
                         _Normal_Dash = true;
                     else
                     {
@@ -170,7 +170,7 @@ namespace OVR_Dash_Manager.Software
             }
         }
 
-        private static bool Check_Is_OfficalDash(String FilePath)
+        private static bool Check_Is_OfficialDash(String FilePath)
         {
             Boolean Legit = false;
 
