@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Timers;
 
 namespace OVR_Dash_Manager.Software
@@ -25,9 +24,9 @@ namespace OVR_Dash_Manager.Software
 
         public static bool Steam_VR_Monitor_Running { get; private set; }
 
-        private delegate void Steam_VR_Running_State_Changed();
+        public delegate void Steam_VR_Running_State_Changed();
 
-        private static event Steam_VR_Running_State_Changed Steam_VR_Running_State_Changed_Event;
+        public static event Steam_VR_Running_State_Changed Steam_VR_Running_State_Changed_Event;
 
         public static Boolean ManagerCalledExit = false;
 
@@ -65,14 +64,34 @@ namespace OVR_Dash_Manager.Software
                 {
                     if (Properties.Settings.Default.ExitLinkOn_UserExit_SteamVR)
                     {
-                        Close_SteamVR_Server();
-                        Software.Oculus_Link.ResetLink();
-                        Close_SteamVR_Server();
+                        Close_SteamVR_ResetLink();
                     }
                 }
             }
 
             ManagerCalledExit = false;
+        }
+
+        public static void Close_SteamVR_ResetLink()
+        {
+            Close_SteamVR_Server();
+
+            Software.Oculus_Link.StopLink();
+            Close_SteamVR_Server();
+
+            Thread pInAMoment = new Thread(StartLinkInAMoment);
+            pInAMoment.Start();
+        }
+
+        private static void StartLinkInAMoment()
+        {
+            Thread.Sleep(2000);
+            ManagerCalledExit = true;
+            Close_SteamVR_Server();
+            Software.Oculus_Link.StartLink();
+            Thread.Sleep(2000);
+            ManagerCalledExit = true;
+            Close_SteamVR_Server();
         }
 
         public static void CheckInstalled()
@@ -194,17 +213,30 @@ namespace OVR_Dash_Manager.Software
             if (Steam_VR_Server_Running)
             {
                 Process[] vrServer = Process.GetProcessesByName("vrserver");
+
                 if (vrServer.Length == 1)
                     vrServer[0].Kill();
+            }
 
-                Process[] vrmonitor = Process.GetProcessesByName("vrmonitor");
-                if (vrmonitor.Length == 1)
+            CloseSteamVRMonitor();
+        }
+
+        private static void CloseSteamVRMonitor()
+        {
+            Process[] vrmonitor = Process.GetProcessesByName("vrmonitor");
+            if (vrmonitor.Length == 1)
+            {
+                if (vrmonitor[0].MainWindowHandle != IntPtr.Zero)
                 {
-                    if (vrmonitor[0].MainWindowHandle != IntPtr.Zero)
+                    try
+                    {
+                        vrmonitor[0].CloseMainWindow();
+                    }
+                    catch (Exception)
                     {
                         try
                         {
-                            vrmonitor[0].CloseMainWindow();
+                            vrmonitor[0].Kill();
                         }
                         catch (Exception)
                         {

@@ -45,5 +45,7 @@
         </UniformGrid>
         <Label Content="OpenXR Runtime:" HorizontalAlignment="Left" Margin="479,0,0,48" VerticalAlignment="Bottom" Height="30" Width="168" HorizontalContentAlignment="Center"/>
         <Button x:Name="btn_OpenSteamVRSettings" Content="SteamVR Settings" HorizontalAlignment="Left" Margin="10,0,0,85" VerticalAlignment="Bottom" Click="btn_OpenSteamVRSettings_Click" Height="22" Width="150" IsEnabled="False" />
+        <Label Content="SteamVR Status:" HorizontalAlignment="Left" Margin="165,0,0,85" VerticalAlignment="Bottom" Height="30" Width="114" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbl_SteamVR_Status" Content="N/A" HorizontalAlignment="Left" Margin="284,0,0,85" VerticalAlignment="Bottom" Height="30" Width="114" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>

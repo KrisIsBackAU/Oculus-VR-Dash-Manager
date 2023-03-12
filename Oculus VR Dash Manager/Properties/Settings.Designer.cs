@@ -130,5 +130,17 @@ namespace OVR_Dash_Manager.Properties {
                 this["Hover_Activation_Time"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Ignore_SteamVR_Status_HoverButtonAction {
+            get {
+                return ((bool)(this["Ignore_SteamVR_Status_HoverButtonAction"]));
+            }
+            set {
+                this["Ignore_SteamVR_Status_HoverButtonAction"] = value;
+            }
+        }
     }
 }

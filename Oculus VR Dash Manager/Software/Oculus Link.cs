@@ -1,10 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OVR_Dash_Manager.Software
 {
@@ -21,6 +17,24 @@ namespace OVR_Dash_Manager.Software
 
                 Steam.ManagerCalledExit = true;
             }
+        }
+
+        public static void StopLink()
+        {
+            if (Service_Manager.GetState("OVRService") == "Running")
+            {
+                Steam.ManagerCalledExit = true;
+
+                Service_Manager.StopService("OVRService");
+
+                Steam.ManagerCalledExit = true;
+            }
+        }
+
+        public static void StartLink()
+        {
+            if (Service_Manager.GetState("OVRService") != "Running")
+                Service_Manager.StartService("OVRService");
         }
 
         public static void SetToOculusRunTime()

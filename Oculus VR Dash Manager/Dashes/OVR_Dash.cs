@@ -329,7 +329,7 @@ namespace OVR_Dash_Manager.Dashes
         private bool SwitchFiles(String NewFile, String OldFile)
         {
             bool Activated = false;
-            
+
             String DashPath = Path.Combine(Software.Oculus.Oculus_Dash_Directory, DashFileName);
             if (File.Exists(NewFile))
             {

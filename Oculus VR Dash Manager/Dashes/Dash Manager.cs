@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.ServiceProcess;
-using System.Threading;
 
 namespace OVR_Dash_Manager.Dashes
 {
@@ -172,21 +171,23 @@ namespace OVR_Dash_Manager.Dashes
             }
             else
             {
-                ServiceController Service = new ServiceController("OVRService");
-                Boolean OVRServiceRunning = Running(Service.Status);
+                Software.Steam.Close_SteamVR_ResetLink();
 
-                try
-                {
-                    Debug.WriteLine("Stopping OVRService");
+                //ServiceController Service = new ServiceController("OVRService");
+                //Boolean OVRServiceRunning = Running(Service.Status);
 
-                    Service.Stop();
-                    if (OVRServiceRunning)
-                        Service.Start();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
+                //try
+                //{
+                //    Debug.WriteLine("Stopping OVRService");
+
+                //    Service.Stop();
+                //    if (OVRServiceRunning)
+                //        Service.Start();
+                //}
+                //catch (Exception ex)
+                //{
+                //    Debug.WriteLine(ex.Message);
+                //}
             }
             return Activated;
         }

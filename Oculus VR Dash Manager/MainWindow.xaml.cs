@@ -27,7 +27,6 @@ namespace OVR_Dash_Manager
             InitializeComponent();
 
             Title += " v" + typeof(MainWindow).Assembly.GetName().Version;
-            Title += " - Early Build";
             Topmost = Properties.Settings.Default.AlwaysOnTop;
         }
 
@@ -41,10 +40,20 @@ namespace OVR_Dash_Manager
             Generate_Hover_Buttons();
 
             Dashes.Dash_Manager.PassMainForm(this);
+            Software.Steam.Steam_VR_Running_State_Changed_Event += Steam_Steam_VR_Running_State_Changed_Event;
 
             Thread Start = new Thread(Startup);
             Start.IsBackground = true;
             Start.Start();
+        }
+
+        private void Steam_Steam_VR_Running_State_Changed_Event()
+        {
+
+            Functions_Old.DoAction(this, new Action(delegate ()
+            {
+                lbl_SteamVR_Status.Content = Software.Steam.Steam_VR_Server_Running ? "Running" : "N/A";
+            }));
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -146,6 +155,8 @@ namespace OVR_Dash_Manager
         {
             Oculus_Dash = new Hover_Button { Hover_Complete_Action = Oculus_Dash_Hover_Activate, Bar = pb_Normal, Check_SteamVR = true, Hovered_Seconds_To_Activate = Properties.Settings.Default.Hover_Activation_Time };
             Exit_Link = new Hover_Button { Hover_Complete_Action = Exit_Link_Hover_Activate, Bar = pb_Exit, Check_SteamVR = true, Hovered_Seconds_To_Activate = Properties.Settings.Default.Hover_Activation_Time };
+            pb_Normal.Maximum = Properties.Settings.Default.Hover_Activation_Time * 1000;
+            pb_Exit.Maximum = Properties.Settings.Default.Hover_Activation_Time * 1000;
         }
 
         private void Check_Hover(object sender, ElapsedEventArgs args)
@@ -192,7 +203,7 @@ namespace OVR_Dash_Manager
         private void Exit_Link_Hover_Activate()
         {
             Exit_Link.Bar.Value = 0;
-            btn_ActivateDash_Click(btn_ExitOculusLink, null);
+            Software.Steam.Close_SteamVR_ResetLink();
         }
 
         private void Update_Dash_Buttons()
@@ -318,8 +329,11 @@ namespace OVR_Dash_Manager
             {
                 if (Button.Check_SteamVR)
                 {
-                    if (!Software.Steam.Steam_VR_Server_Running)
-                        return;
+                    if (!Properties.Settings.Default.Ignore_SteamVR_Status_HoverButtonAction)
+                    {
+                        if (!Software.Steam.Steam_VR_Server_Running)
+                            return;
+                    }
                 }
 
                 TimeSpan Passed = DateTime.Now.Subtract(Button.Hover_Started);

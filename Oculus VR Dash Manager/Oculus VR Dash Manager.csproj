@@ -12,15 +12,15 @@
     <Copyright>KrisIsBack (AU)</Copyright>
     <PackageIcon>Icon.ico</PackageIcon>
     <PackageIconUrl />
-    <Version>1.0.3.0</Version>
+    <Version>1.0.3.1</Version>
     <Authors>KrisIsBack (AU)</Authors>
     <PackageReleaseNotes>Official &amp; Oculus Killer - Supported with Updates
 https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
     <NeutralLanguage>en-AU</NeutralLanguage>
     <RepositoryUrl>https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</RepositoryUrl>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
+    <AssemblyVersion>1.0.3.1</AssemblyVersion>
+    <FileVersion>1.0.3.1</FileVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 

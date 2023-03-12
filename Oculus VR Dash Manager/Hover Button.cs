@@ -24,7 +24,7 @@ namespace OVR_Dash_Manager
         {
             Hovering = true;
             Hover_Started = DateTime.Now;
-            Bar.Value = 0;
+            Bar.Value = 10;
         }
 
         public void StopHovering()
