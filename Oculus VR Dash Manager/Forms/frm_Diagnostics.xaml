@@ -39,7 +39,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Device Type" Width="250" DisplayMemberBinding="{Binding Type}" />
-                    <GridViewColumn Header="Serial" Width="125" DisplayMemberBinding="{Binding Serial}" />
+                    <GridViewColumn Header="MaskedSerial" Width="125" DisplayMemberBinding="{Binding Serial}" />
                 </GridView>
             </ListView.View>
         </ListView>

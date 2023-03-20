@@ -54,6 +54,7 @@ namespace OVR_Dash_Manager
                     string[] Data = DeviceID.Split('\\');
                     string Type = "";
                     string Serial = "";
+                    string MaskedSerial = "";
 
                     if (Data.Length == 3)
                     {
@@ -75,11 +76,11 @@ namespace OVR_Dash_Manager
 
                         if (SerialLength > 0)
                         {
-                            Serial = Serial.Substring(Serial.Length - 5, 5);
-                            Serial = Serial.PadLeft(SerialLength, '*');
+                            MaskedSerial = Serial.Substring(Serial.Length - 5, 5);
+                            MaskedSerial = MaskedSerial.PadLeft(SerialLength, '*');
                         }
 
-                        PluggedInDevices.Add(new USBDeviceInfo(DeviceID, Type, Serial));
+                        PluggedInDevices.Add(new USBDeviceInfo(DeviceID, Type, MaskedSerial, Serial));
                     }
                 }
                 catch (Exception)
@@ -108,15 +109,17 @@ namespace OVR_Dash_Manager
     /// <summary>USB Device info Class</summary>
     public class USBDeviceInfo
     {
-        public USBDeviceInfo(string DeviceID, string Type, string Serial)
+        public USBDeviceInfo(string DeviceID, string Type, string MaskedSerial, string FullSerial)
         {
             this.DeviceID = DeviceID;
             this.Type = Type;
-            this.Serial = Serial;
+            this.MaskedSerial = MaskedSerial;
+            this.FullSerial = FullSerial;
         }
 
         public string DeviceID { get; private set; }
         public string Type { get; private set; }
-        public string Serial { get; private set; }
+        public string MaskedSerial { get; private set; }
+        public string FullSerial { get; private set;}
     }
 }
