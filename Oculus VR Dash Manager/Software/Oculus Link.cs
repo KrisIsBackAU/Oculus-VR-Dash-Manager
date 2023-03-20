@@ -19,9 +19,11 @@ namespace OVR_Dash_Manager.Software
                 if (string.IsNullOrEmpty(device.FullSerial) || device.Type != "Quest") continue;
                 var client = new AdbClient();
                 var adbDevices = client.GetDevices();
+                // Ensure adb only interacts with quest device serial nos
                 foreach (var adbDevice in adbDevices.Where(adbDevice => device.FullSerial == adbDevice.Serial))
                 {
-                    client.StartApp(adbDevice, "com.oculus.xrstreamingclient");
+                    // Only start quest link if adb has been authorized
+                    if (adbDevice.State == DeviceState.Online) client.StartApp(adbDevice, "com.oculus.xrstreamingclient");
                 }
             }
         }
