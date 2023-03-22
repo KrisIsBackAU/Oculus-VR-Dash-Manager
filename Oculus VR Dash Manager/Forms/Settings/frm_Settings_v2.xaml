@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OVR_Dash_Manager.Forms.Settings"
         mc:Ignorable="d"
-        Title="Settings" Width="863" Height="581.283" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Settings" Width="863" Height="619.283" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -26,7 +26,7 @@
                 <Label Content="Ignore SteamVR Status for Hover Button Actions" HorizontalAlignment="Left" Margin="166,79,0,0" VerticalAlignment="Top" Height="30" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Oculus Settings" Margin="10,192,10,0" Height="210" VerticalAlignment="Top">
+        <GroupBox Header="Oculus Settings" Margin="10,192,10,0" Height="248" VerticalAlignment="Top">
             <Grid Margin="0">
                 <local:uc_Setting Setting="RunOculusClientOnStartup" Margin="10,8,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
                 <Label Content="Start Oculus Client Software - When Dash Manager Launches" Margin="165,8,10,0" VerticalAlignment="Top" Height="30" />
@@ -36,9 +36,11 @@
                 <Label Content="Close Oculus Client - When Dash Manager Exits" Margin="165,84,10,0" VerticalAlignment="Top" Height="30" />
                 <local:uc_Setting Setting="CloseOculusServicesOnExit" Margin="10,122,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
                 <Label Content="Stop Oculus Services - When Manager Exits (When Oculus Services set to Manual Startup)" Margin="165,122,10,0" VerticalAlignment="Top" Height="30" />
+                <local:uc_Setting Setting="QuestPolling" Margin="10,160,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
+                <Label Content="Attempt to launch Quest Link automatically when connected to this computer (EXPERIMENTAL, requires Developer Mode)" Margin="165,160,10,0" VerticalAlignment="Top" Height="30" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Steam / SteamVR Settings" Margin="10,407,10,0" Height="135" VerticalAlignment="Top">
+        <GroupBox Header="Steam / SteamVR Settings" Margin="10,445,10,0" Height="135" VerticalAlignment="Top">
             <Grid Margin="0">
                 <local:uc_Setting Setting="SteamVRFocusFix" Margin="10,3,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
                 <Label Content="Fix SteamVR Admin Program Focus Issue When it Occurs (Task View Glitch)" Margin="166,3,10,0" VerticalAlignment="Top" Height="30" />

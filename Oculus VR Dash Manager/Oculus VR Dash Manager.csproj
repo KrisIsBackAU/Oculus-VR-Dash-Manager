@@ -29,6 +29,7 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AdvancedSharpAdbClient" Version="2.5.4" />
     <PackageReference Include="InputSimulator" Version="1.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Management" Version="6.0.0" />
@@ -51,6 +52,15 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ADB\adb.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ADB\AdbWinApi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ADB\AdbWinUsbApi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -59,6 +69,7 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
 
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="ADB\" />
   </ItemGroup>
 
 </Project>

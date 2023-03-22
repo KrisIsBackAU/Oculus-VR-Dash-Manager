@@ -1,11 +1,31 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Linq;
+using AdvancedSharpAdbClient;
 
 namespace OVR_Dash_Manager.Software
 {
     public static class Oculus_Link
     {
+        public static void StartLinkOnDevice()
+        {
+            // Allow time for quest to register with ADB server
+            System.Threading.Thread.Sleep(1000);
+            var connectedDevices = USB_Devices_Functions.GetUSBDevices();
+            foreach (var device in connectedDevices)
+            {
+                if (string.IsNullOrEmpty(device.FullSerial) || device.Type != "Quest") continue;
+                var client = new AdbClient();
+                var adbDevices = client.GetDevices();
+                // Ensure adb only interacts with quest device serial nos
+                foreach (var adbDevice in adbDevices.Where(adbDevice => device.FullSerial == adbDevice.Serial))
+                {
+                    // Only start quest link if adb has been authorized
+                    if (adbDevice.State == DeviceState.Online) client.StartApp(adbDevice, "com.oculus.xrstreamingclient");
+                }
+            }
+        }
         public static void ResetLink()
         {
             if (Service_Manager.GetState("OVRService") == "Running")

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using AdvancedSharpAdbClient;
+using OVR_Dash_Manager.Software;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -77,6 +80,30 @@ namespace OVR_Dash_Manager
         private void Startup()
         {
             Functions.Process_Watcher.Start();
+
+            Functions.Device_Watcher.DeviceConnected += Oculus_Link.StartLinkOnDevice;
+            if (Properties.Settings.Default.QuestPolling)
+            {
+                // Start listening for new device connections
+                Functions.Device_Watcher.Start();
+                // Start an adb server if we don't already have one
+                if (!AdbServer.Instance.GetStatus().IsRunning)
+                {
+                    var server = new AdbServer();
+                    try
+                    {
+                        var result = server.StartServer(@".\ADB\adb.exe", false);
+                        if (result != StartServerResult.Started)
+                        {
+                            Debug.WriteLine("Can't start adb server");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                }
+            }
 
             Functions.Process_Watcher.IngoreEXEName("cmd.exe");
             Functions.Process_Watcher.IngoreEXEName("conhost.exe");
