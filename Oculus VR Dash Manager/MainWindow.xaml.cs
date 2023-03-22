@@ -86,7 +86,7 @@ namespace OVR_Dash_Manager
             // Start listening for new device connections
             Functions.Device_Watcher.DeviceConnected += Oculus_Link.StartLinkOnDevice;
             Functions.Device_Watcher.Start();
-
+            ADB.Start();
             /// 
 
             Functions.Process_Watcher.IngoreEXEName("cmd.exe");
