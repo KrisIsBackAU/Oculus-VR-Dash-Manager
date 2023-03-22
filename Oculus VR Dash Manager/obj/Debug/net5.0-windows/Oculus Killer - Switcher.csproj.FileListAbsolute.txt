@@ -1,5 +1,0 @@
-C:\Users\Kris\source\repos\Oculus Killer - Switcher\Oculus Killer - Switcher\obj\Debug\net5.0-windows\Oculus Killer - Switcher.csproj.AssemblyReference.cache
-C:\Users\Kris\source\repos\Oculus Killer - Switcher\Oculus Killer - Switcher\obj\Debug\net5.0-windows\MainWindow.g.cs
-C:\Users\Kris\source\repos\Oculus Killer - Switcher\Oculus Killer - Switcher\obj\Debug\net5.0-windows\App.g.cs
-C:\Users\Kris\source\repos\Oculus Killer - Switcher\Oculus Killer - Switcher\obj\Debug\net5.0-windows\Oculus Killer - Switcher_MarkupCompile.cache
-C:\Users\Kris\source\repos\Oculus Killer - Switcher\Oculus Killer - Switcher\obj\Debug\net5.0-windows\Oculus Killer - Switcher_MarkupCompile.lref
