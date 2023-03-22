@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Kris\\source\\repos\\Oculus VR Dash Manager\\Oculus VR Dash Manager\\Oculus VR Dash Manager.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Kris\\source\\repos\\Oculus VR Dash Manager\\Oculus VR Dash Manager\\Oculus VR Dash Manager.csproj": {
+      "version": "1.0.3.1",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Kris\\source\\repos\\Oculus VR Dash Manager\\Oculus VR Dash Manager\\Oculus VR Dash Manager.csproj",
+        "projectName": "Oculus VR Dash Manager",
+        "projectPath": "C:\\Users\\Kris\\source\\repos\\Oculus VR Dash Manager\\Oculus VR Dash Manager\\Oculus VR Dash Manager.csproj",
+        "packagesPath": "C:\\Users\\Kris\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kris\\source\\repos\\Oculus VR Dash Manager\\Oculus VR Dash Manager\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Kris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "dependencies": {
+            "InputSimulator": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.ServiceProcess.ServiceController": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

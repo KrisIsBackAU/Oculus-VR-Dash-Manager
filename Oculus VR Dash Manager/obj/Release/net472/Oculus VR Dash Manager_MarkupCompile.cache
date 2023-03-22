@@ -1,0 +1,20 @@
+﻿Oculus VR Dash Manager
+1.0.3.1
+
+winexe
+C#
+.cs
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\obj\Release\net472\
+OVR_Dash_Manager
+none
+false
+TRACE;RELEASE;NETFRAMEWORK;NET472;
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\App.xaml
+14-2022044130
+
+28-1514800826
+271377220384
+Forms\frm_Diagnostics.xaml;Forms\frm_Help.xaml;Forms\frm_Oculus_Service_Control.xaml;Forms\frm_Settings.xaml;Forms\frm_SteamVR_Settings.xaml;Forms\frm_TestWindow.xaml;Forms\frm_UpdateChecker.xaml;Forms\Settings\frm_Settings_v2.xaml;Forms\Settings\uc_Setting.xaml;MainWindow.xaml;Theme\MetroDark.MSControls.Core.Implicit.xaml;Theme\Styles.Shared.xaml;Theme\Styles.WPF.xaml;Theme\Theme.Colors.xaml;
+
+False
+

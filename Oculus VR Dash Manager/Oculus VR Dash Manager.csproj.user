@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Forms\frm_Diagnostics.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\frm_Help.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\frm_Oculus_Service_Control.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\frm_Settings.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\frm_SteamVR_Settings.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\frm_TestWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\frm_UpdateChecker.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\Settings\frm_Settings_v2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Forms\Settings\uc_Setting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Forms\frm_Diagnostics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\frm_Help.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\frm_Oculus_Service_Control.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\frm_Settings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\frm_SteamVR_Settings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\frm_TestWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\frm_UpdateChecker.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\Settings\frm_Settings_v2.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Forms\Settings\uc_Setting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
