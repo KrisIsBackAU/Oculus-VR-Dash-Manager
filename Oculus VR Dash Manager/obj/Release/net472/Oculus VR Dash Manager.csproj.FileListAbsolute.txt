@@ -43,3 +43,12 @@ C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\obj\Rel
 C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\obj\Release\net472\Oculus VR Dash Manager.csproj.CopyComplete
 C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\obj\Release\net472\Oculus VR Dash Manager.exe
 C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\obj\Release\net472\Oculus VR Dash Manager.pdb
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\ADB\adb.exe
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\ADB\AdbWinApi.dll
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\ADB\AdbWinUsbApi.dll
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\AdvancedSharpAdbClient.dll
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\System.Buffers.dll
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\System.Memory.dll
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\System.Numerics.Vectors.dll
+C:\Users\Kris\source\repos\Oculus VR Dash Manager\Oculus VR Dash Manager\bin\Release\net472\System.Runtime.CompilerServices.Unsafe.dll

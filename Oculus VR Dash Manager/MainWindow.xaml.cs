@@ -6,7 +6,6 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using AdvancedSharpAdbClient;
 using OVR_Dash_Manager.Software;
 using WindowsInput;
 using WindowsInput.Native;
@@ -81,29 +80,14 @@ namespace OVR_Dash_Manager
         {
             Functions.Process_Watcher.Start();
 
+            /// Created By https://github.com/quagsirus
+            // KrisIsBack Addin - Sorted code into their own places & added warning message when setting turned on
+
+            // Start listening for new device connections
             Functions.Device_Watcher.DeviceConnected += Oculus_Link.StartLinkOnDevice;
-            if (Properties.Settings.Default.QuestPolling)
-            {
-                // Start listening for new device connections
-                Functions.Device_Watcher.Start();
-                // Start an adb server if we don't already have one
-                if (!AdbServer.Instance.GetStatus().IsRunning)
-                {
-                    var server = new AdbServer();
-                    try
-                    {
-                        var result = server.StartServer(@".\ADB\adb.exe", false);
-                        if (result != StartServerResult.Started)
-                        {
-                            Debug.WriteLine("Can't start adb server");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex.Message);
-                    }
-                }
-            }
+            Functions.Device_Watcher.Start();
+
+            /// 
 
             Functions.Process_Watcher.IngoreEXEName("cmd.exe");
             Functions.Process_Watcher.IngoreEXEName("conhost.exe");
@@ -412,6 +396,22 @@ namespace OVR_Dash_Manager
             Forms.Settings.frm_Settings_v2 Settings = new Forms.Settings.frm_Settings_v2();
             //Forms.frm_Settings Settings = new Forms.frm_Settings();
             OpenForm(Settings);
+        }
+
+        private bool Get_Properties_Setting(String SettingName)
+        {
+            bool Setting = false;
+
+            try
+            {
+                Setting = (bool)Properties.Settings.Default[SettingName];
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return Setting;
         }
 
         private void btn_Diagnostics_Click(object sender, RoutedEventArgs e)

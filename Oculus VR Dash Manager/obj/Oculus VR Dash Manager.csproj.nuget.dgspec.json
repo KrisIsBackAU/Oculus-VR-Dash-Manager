@@ -43,6 +43,10 @@
         "net472": {
           "targetAlias": "net472",
           "dependencies": {
+            "AdvancedSharpAdbClient": {
+              "target": "Package",
+              "version": "[2.5.4, )"
+            },
             "InputSimulator": {
               "target": "Package",
               "version": "[1.0.4, )"

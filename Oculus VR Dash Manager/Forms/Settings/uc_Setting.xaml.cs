@@ -16,6 +16,8 @@ namespace OVR_Dash_Manager.Forms.Settings
         }
 
         public string Setting { get; set; }
+        public bool Alert { get; set; }
+        public string AlertMessage { get; set; }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -58,6 +60,15 @@ namespace OVR_Dash_Manager.Forms.Settings
                 Properties.Settings.Default[Setting] = Value;
                 Properties.Settings.Default.Save();
                 Update_Buttons();
+
+                if (!Current)
+                {
+                    if (Value)
+                    {
+                        if (Alert)
+                            MessageBox.Show(AlertMessage, "Warning!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                }
             }
         }
 
