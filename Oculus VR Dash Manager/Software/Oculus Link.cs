@@ -10,7 +10,7 @@ namespace OVR_Dash_Manager.Software
     {
         public static void StartLinkOnDevice()
         {
-            /// Created By https://github.com/quagsirus
+            /// ADB Auto Start Created By https://github.com/quagsirus
             /// 
             if (Properties.Settings.Default.QuestPolling)
             {
@@ -32,7 +32,7 @@ namespace OVR_Dash_Manager.Software
                     }
                 }
             }
-            /// Created By https://github.com/quagsirus
+            /// ADB Auto Start Created By https://github.com/quagsirus
             /// 
         }
 

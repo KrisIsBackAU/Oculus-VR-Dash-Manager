@@ -66,6 +66,7 @@ namespace OVR_Dash_Manager
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Software.ADB.Stop();
             Functions.Process_Watcher.Stop();
 
             Timer_Functions.StopTimer("Hover Checker");
@@ -86,7 +87,7 @@ namespace OVR_Dash_Manager
         {
             Functions.Process_Watcher.Start();
 
-            /// Created By https://github.com/quagsirus
+            /// ADB Auto Start Created By https://github.com/quagsirus
             // KrisIsBack Addin - Sorted code into their own places & added warning message when setting turned on
 
             // Start listening for new device connections
