@@ -50,7 +50,7 @@ namespace OVR_Dash_Manager.Forms
                 lbl_OculussClient.Content = "Not Found";
 
             lbl_OfficialDash.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.Normal) ? "Installed" : "Not Found";
-            lbl_OculusKiller.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.Normal) ? "Installed" : "Not Found";
+            lbl_OculusKiller.Content = Dashes.Dash_Manager.IsInstalled(Dashes.Dash_Type.OculusKiller) ? "Installed" : "Not Found";
 
             FileVersionInfo Info = FileVersionInfo.GetVersionInfo(Software.Oculus.Oculus_Dash_File);
             Dashes.Dash_Type Current = Dashes.Dash_Manager.CheckWhosDash(Info.ProductName);
@@ -73,6 +73,10 @@ namespace OVR_Dash_Manager.Forms
 
             if (CurrentRuntime == Software.Steam_VR_Settings.OpenXR_Runtime.SteamVR)
                 lbl_OpenXR_RunTime.Content = "SteamVR Runtime";
+
+            lbl_FastSwitch_Enabled.Content = Properties.Settings.Default.FastSwitch;
+
+            lbl_OculusLocation.Text = Software.Oculus.Oculus_Dash_Directory;
         }
 
         private void btn_OculusDebugTool_Click(object sender, RoutedEventArgs e)

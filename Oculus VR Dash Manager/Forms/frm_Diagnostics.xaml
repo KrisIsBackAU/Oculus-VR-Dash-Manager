@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Diagnostics" Height="644" Width="430" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Diagnostics" Height="688.426" Width="430" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -47,5 +47,9 @@
         <Button x:Name="btn_OculusDebugTool" Content="Oculus Debug Tool" HorizontalAlignment="Right" Margin="0,0,10,156" VerticalAlignment="Bottom" Width="170" Click="btn_OculusDebugTool_Click"/>
         <Label Content="OpenXR Runtime:" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top" />
         <Label x:Name="lbl_OpenXR_RunTime" Content="Label" Margin="174,337,10,0" VerticalAlignment="Top" />
+        <Label Content="Fast Switch Enabled:" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lbl_FastSwitch_Enabled" Content="Label" Margin="174,370,10,0" VerticalAlignment="Top" />
+        <Label Content="Oculus Location:" HorizontalAlignment="Left" Margin="10,403,0,0" VerticalAlignment="Top" />
+        <TextBlock x:Name="lbl_OculusLocation" Text="Label" Margin="174,403,10,0" VerticalAlignment="Top" Height="65" Foreground="White" TextWrapping="Wrap" />
     </Grid>
 </Window>

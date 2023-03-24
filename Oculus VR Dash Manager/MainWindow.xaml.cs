@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using OVR_Dash_Manager.Software;
 using WindowsInput;
 using WindowsInput.Native;
@@ -27,6 +29,10 @@ namespace OVR_Dash_Manager
         public MainWindow()
         {
             InitializeComponent();
+
+            Application _This = Application.Current;
+            _This.DispatcherUnhandledException += AppDispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 
             Title += " v" + typeof(MainWindow).Assembly.GetName().Version;
             Topmost = Properties.Settings.Default.AlwaysOnTop;
@@ -134,6 +140,7 @@ namespace OVR_Dash_Manager
 
                 Functions_Old.DoAction(this, new Action(delegate ()
                 {
+                    lbl_SteamVR_Status.Content = "Installed: " + Software.Steam.Steam_VR_Installed;
                     lbl_CurrentSetting.Content = Software.Oculus.Current_Dash_Name;
                     Update_Dash_Buttons();
                 }));
@@ -314,14 +321,19 @@ namespace OVR_Dash_Manager
 
             if (Clicked.Tag is Dashes.Dash_Type Dash)
             {
-                if (Properties.Settings.Default.FastSwitch)
-                    Dashes.Dash_Manager.Activate_FastTransition(Dash);
+                if (Dashes.Dash_Manager.IsInstalled(Dash))
+                {
+                    if (Properties.Settings.Default.FastSwitch)
+                        Dashes.Dash_Manager.Activate_FastTransition(Dash);
+                    else
+                        Dashes.Dash_Manager.Activate(Dash);
+
+                    Software.Oculus.Check_Current_Dash();
+
+                    lbl_CurrentSetting.Content = Software.Oculus.Current_Dash_Name;
+                }
                 else
-                    Dashes.Dash_Manager.Activate(Dash);
-
-                Software.Oculus.Check_Current_Dash();
-
-                lbl_CurrentSetting.Content = Software.Oculus.Current_Dash_Name;
+                    lbl_CurrentSetting.Content = Dashes.Dash_Manager.GetDashName(Dash) + " Not Installed";
             }
         }
 
@@ -497,5 +509,57 @@ namespace OVR_Dash_Manager
         }
 
         #endregion OpenXR Runtime
+
+        public void ErrorLog(Exception e)
+        {
+            File.AppendAllText("ErrorLog.txt", Environment.NewLine +
+                                               Environment.NewLine +
+                                               " ------ " +
+                                               DateTime.Now.ToString(CultureInfo.InvariantCulture) +
+                                               " ------" +
+                                               Environment.NewLine +
+                                               e.Message +
+                                               Environment.NewLine +
+                                               e.StackTrace +
+                                               Environment.NewLine +
+                                               e.TargetSite);
+        }
+
+        private static void AppDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs ex)
+        {
+            Exception e = ex.Exception;
+
+            // log or handle exception
+            ex.Handled = true;
+            File.AppendAllText("ErrorLog.txt", Environment.NewLine +
+                       Environment.NewLine +
+                       " ------ " +
+                       DateTime.Now.ToString(CultureInfo.InvariantCulture) +
+                       " ------" +
+                       Environment.NewLine +
+                       e.Message +
+                       Environment.NewLine +
+                       e.StackTrace +
+                       Environment.NewLine +
+                       e.TargetSite);
+        }
+
+        private static void AppDomainUnhandledException(object sender, UnhandledExceptionEventArgs ex)
+        {
+            Exception e = (Exception)ex.ExceptionObject;
+            File.AppendAllText("ErrorLog.txt", Environment.NewLine +
+                                   Environment.NewLine +
+                                   " ------ " +
+                                   DateTime.Now.ToString(CultureInfo.InvariantCulture) +
+                                   " ------" +
+                                   Environment.NewLine +
+                                   e.Message +
+                                   Environment.NewLine +
+                                   e.StackTrace +
+                                   Environment.NewLine +
+                                   e.TargetSite);
+
+            // log or handle exception
+        }
     }
 }
