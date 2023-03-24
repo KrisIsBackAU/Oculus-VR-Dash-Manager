@@ -88,10 +88,16 @@ namespace OVR_Dash_Manager.Dashes
             switch (Dash)
             {
                 case Dash_Type.Normal:
-                    return Oculus_Dash.Installed;
+                    if (Oculus_Dash != null)
+                        return Oculus_Dash.Installed;
+                    else
+                        return false;
 
                 case Dash_Type.OculusKiller:
-                    return SteamVR_Dash.Installed;
+                    if (SteamVR_Dash != null)
+                        return SteamVR_Dash.Installed;
+                    else
+                        return false;
 
                 default:
                     return false;

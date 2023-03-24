@@ -40,6 +40,7 @@ namespace OVR_Dash_Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            btn_Diagnostics.IsEnabled = false;
             lbl_CurrentSetting.Content = "Starting Up";
             Elevated = Functions.Process_Functions.IsCurrentProcess_Elevated();
 
@@ -141,6 +142,7 @@ namespace OVR_Dash_Manager
 
                 Functions_Old.DoAction(this, new Action(delegate ()
                 {
+                    btn_Diagnostics.IsEnabled = true;
                     lbl_SteamVR_Status.Content = "Installed: " + Software.Steam.Steam_VR_Installed;
                     lbl_CurrentSetting.Content = Software.Oculus.Current_Dash_Name;
                     Update_Dash_Buttons();
