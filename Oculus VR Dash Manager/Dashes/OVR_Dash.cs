@@ -259,6 +259,12 @@ namespace OVR_Dash_Manager.Dashes
 
                 try
                 {
+                    if (File.Exists($"{Software.Oculus.Oculus_Dash_File}.delete"))
+                    {
+                        File.Delete($"{Software.Oculus.Oculus_Dash_File}.delete");
+                        Debug.WriteLine("Removed Old Dash File");
+                    }
+
                     if (File.Exists(Software.Oculus.Oculus_Dash_File))
                     {
                         Debug.WriteLine("Moving Active Dash");
