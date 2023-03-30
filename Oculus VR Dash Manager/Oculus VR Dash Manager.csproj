@@ -12,15 +12,15 @@
     <Copyright>KrisIsBack (AU)</Copyright>
     <PackageIcon>Icon.ico</PackageIcon>
     <PackageIconUrl />
-    <Version>1.0.3.1</Version>
+    <Version>1.0.3.3</Version>
     <Authors>KrisIsBack (AU)</Authors>
     <PackageReleaseNotes>Official &amp; Oculus Killer - Supported with Updates
 https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
     <NeutralLanguage>en-AU</NeutralLanguage>
     <RepositoryUrl>https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</RepositoryUrl>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyVersion>1.0.3.1</AssemblyVersion>
-    <FileVersion>1.0.3.1</FileVersion>
+    <AssemblyVersion>1.0.3.3</AssemblyVersion>
+    <FileVersion>1.0.3.3</FileVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
@@ -36,9 +36,14 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Software\Windows Audio.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AdvancedSharpAdbClient" Version="2.5.4" />
+    <PackageReference Include="BrettHewitt.PlaybackDeviceSwitcher" Version="1.0.5" />
     <PackageReference Include="InputSimulator" Version="1.0.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="6.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.0" />
   </ItemGroup>
@@ -76,6 +81,15 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
 
   <ItemGroup>
     <Folder Include="ADB\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AudioSwitcher.AudioApi">
+      <HintPath>..\..\..\..\..\Downloads\AudioSwitcher-master\AudioSwitcher.AudioApi\bin\Debug\net45\AudioSwitcher.AudioApi.dll</HintPath>
+    </Reference>
+    <Reference Include="AudioSwitcher.AudioApi.CoreAudio">
+      <HintPath>..\..\..\..\..\Downloads\AudioSwitcher-master\AudioSwitcher.AudioApi.CoreAudio\bin\Debug\net45\AudioSwitcher.AudioApi.CoreAudio.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OVR_Dash_Manager.Forms.Settings"
         mc:Ignorable="d"
-        Title="Settings" Width="863" Height="660.422" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Settings" Width="863" Height="875.24" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -46,8 +46,23 @@
                 <local:uc_Setting Setting="SteamVRFocusFix" Margin="10,3,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
                 <Label Content="Fix SteamVR Admin Program Focus Issue When it Occurs (Task View Glitch)" Margin="166,3,10,0" VerticalAlignment="Top" Height="30" />
                 <local:uc_Setting Setting="ExitLinkOn_UserExit_SteamVR" Margin="10,41,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
-                <Label Content="Exit Oculus Link when User Closes Steam VR (Stable Link Connection Recommended)" HorizontalAlignment="Left" Margin="166,41,0,0" VerticalAlignment="Top" Height="30" />
+                <Label Content="Exit Oculus Link when User Closes Steam VR (Stable Link Connection Recommended)" Margin="166,41,10,0" VerticalAlignment="Top" Height="30" />
             </Grid>
         </GroupBox>
+        <GroupBox Header="Automatic Audio Switcher" Margin="10,617,10,11">
+            <Grid Margin="0">
+                <local:uc_Setting Setting="Automatic_Audio_Switching" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
+                <Label Content="Automatically Switch Audio on Program Launch (to Quest Speaker) &amp; Program Close (to Normal Speaker)" VerticalAlignment="Top" Height="30" Margin="155,0,10,0" />
+                <local:uc_Setting Setting="Auto_Audio_Change_DefaultCommunication" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" Margin="0,32,0,0" />
+                <Label Content="Change Default Communications Device As Well" VerticalAlignment="Top" Height="30" Margin="155,33,10,0" />
+                <ComboBox x:Name="cbo_NormalSpeaker" Margin="155,68,170,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="cbo_NormalSpeaker_SelectionChanged"/>
+                <Label Content="Normal Speaker" VerticalAlignment="Top" Height="30" Margin="0,68,0,0" HorizontalAlignment="Left" Width="150" />
+                <ComboBox x:Name="cbo_QuestSpeaker" Margin="155,103,170,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="cbo_QuestSpeaker_SelectionChanged"/>
+                <Label Content="Quest Speaker" VerticalAlignment="Top" Height="30" Margin="0,103,0,0" HorizontalAlignment="Left" Width="150" />
+                <Button x:Name="btn_Set_Default_Normal" Margin="650,68,10,0" Content="Set As Current" Click="btn_Set_Default_Normal_Click" Height="30" VerticalAlignment="Top" />
+                <Button x:Name="btn_Set_Default_Quest" Margin="650,103,10,0" Content="Set As Current" Click="btn_Set_Default_Quest_Click" Height="30" VerticalAlignment="Top" />
+            </Grid>
+        </GroupBox>
+
     </Grid>
 </Window>

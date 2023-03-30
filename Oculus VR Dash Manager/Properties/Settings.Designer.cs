@@ -12,7 +12,7 @@ namespace OVR_Dash_Manager.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -152,6 +152,78 @@ namespace OVR_Dash_Manager.Properties {
             }
             set {
                 this["QuestPolling"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Automatic_Audio_Switching {
+            get {
+                return ((bool)(this["Automatic_Audio_Switching"]));
+            }
+            set {
+                this["Automatic_Audio_Switching"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int Normal_Speaker_ID {
+            get {
+                return ((int)(this["Normal_Speaker_ID"]));
+            }
+            set {
+                this["Normal_Speaker_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int Quest_Speaker_ID {
+            get {
+                return ((int)(this["Quest_Speaker_ID"]));
+            }
+            set {
+                this["Quest_Speaker_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid Normal_Speaker_GUID {
+            get {
+                return ((global::System.Guid)(this["Normal_Speaker_GUID"]));
+            }
+            set {
+                this["Normal_Speaker_GUID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid Quest_Speaker_GUID {
+            get {
+                return ((global::System.Guid)(this["Quest_Speaker_GUID"]));
+            }
+            set {
+                this["Quest_Speaker_GUID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Auto_Audio_Change_DefaultCommunication {
+            get {
+                return ((bool)(this["Auto_Audio_Change_DefaultCommunication"]));
+            }
+            set {
+                this["Auto_Audio_Change_DefaultCommunication"] = value;
             }
         }
     }

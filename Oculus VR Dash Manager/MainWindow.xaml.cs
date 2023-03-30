@@ -1,5 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using OVR_Dash_Manager.Software;
+using PlaybackDeviceSwitcher;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
@@ -8,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using OVR_Dash_Manager.Software;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -36,11 +36,14 @@ namespace OVR_Dash_Manager
 
             Title += " v" + typeof(MainWindow).Assembly.GetName().Version;
             Topmost = Properties.Settings.Default.AlwaysOnTop;
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             btn_Diagnostics.IsEnabled = false;
+            btn_OpenSettings.IsEnabled = false;
             lbl_CurrentSetting.Content = "Starting Up";
             Elevated = Functions.Process_Functions.IsCurrentProcess_Elevated();
 
@@ -67,6 +70,7 @@ namespace OVR_Dash_Manager
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Software.Windows_Audio_v2.Set_To_Normal_Speaker_Auto();
             Software.ADB.Stop();
             Functions.Process_Watcher.Stop();
 
@@ -140,9 +144,16 @@ namespace OVR_Dash_Manager
 
                 CheckRunTime();
 
+                Software.Windows_Audio_v2.Setup();
+                Software.Windows_Audio_v2.Set_To_Quest_Speaker_Auto();
+
+                //Software.Windows_Audio.Setup();
+                //Software.Windows_Audio.Set_To_Quest_Speaker_Auto();
+
                 Functions_Old.DoAction(this, new Action(delegate ()
                 {
                     btn_Diagnostics.IsEnabled = true;
+                    btn_OpenSettings.IsEnabled = true;
                     lbl_SteamVR_Status.Content = "Installed: " + Software.Steam.Steam_VR_Installed;
                     lbl_CurrentSetting.Content = Software.Oculus.Current_Dash_Name;
                     Update_Dash_Buttons();
@@ -276,7 +287,7 @@ namespace OVR_Dash_Manager
 
             if (sender is Button button)
                 ActivateDash(button);
-
+            
             Thread ReactivateButtons = new Thread(Thread_ReactivateButtons);
             ReactivateButtons.IsBackground = true;
             ReactivateButtons.Start();
@@ -286,7 +297,7 @@ namespace OVR_Dash_Manager
 
         private void Thread_ReactivateButtons()
         {
-            Thread.Sleep(10000);
+            Thread.Sleep(5000);
             Functions_Old.DoAction(this, new Action(delegate () { Update_Dash_Buttons(); }));
         }
 
