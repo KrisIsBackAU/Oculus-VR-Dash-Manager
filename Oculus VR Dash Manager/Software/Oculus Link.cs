@@ -1,8 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using AdvancedSharpAdbClient;
+using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Linq;
-using AdvancedSharpAdbClient;
 
 namespace OVR_Dash_Manager.Software
 {
@@ -11,7 +11,7 @@ namespace OVR_Dash_Manager.Software
         public static void StartLinkOnDevice()
         {
             /// ADB Auto Start Created By https://github.com/quagsirus
-            /// 
+            ///
             if (Properties.Settings.Default.QuestPolling)
             {
                 ADB.Start(); // KrisIsBack Addin - This allow when the setting is turned on after launch (only trys if needed to)
@@ -33,9 +33,8 @@ namespace OVR_Dash_Manager.Software
                 }
             }
             /// ADB Auto Start Created By https://github.com/quagsirus
-            /// 
+            ///
         }
-
 
         public static void ResetLink()
         {

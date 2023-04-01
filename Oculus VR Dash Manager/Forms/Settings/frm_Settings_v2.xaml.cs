@@ -1,8 +1,5 @@
-﻿using PlaybackDeviceSwitcher;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Linq;
 using System.Windows;
-using System.Linq;
 using System.Windows.Controls;
 
 namespace OVR_Dash_Manager.Forms.Settings
@@ -12,8 +9,8 @@ namespace OVR_Dash_Manager.Forms.Settings
     /// </summary>
     public partial class frm_Settings_v2 : Window
     {
-        bool Audio_DevicesChanged = false;
-        bool FireEvents = false;
+        private bool Audio_DevicesChanged = false;
+        private bool FireEvents = false;
 
         public frm_Settings_v2()
         {
@@ -38,7 +35,6 @@ namespace OVR_Dash_Manager.Forms.Settings
             {
                 if (MessageBox.Show(this, "Automatic Audio Devices Changed - Are you sure you want to save this ?", "Confirm Automatic Audio Device Change", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-
                     Software.Windows_Audio_v2.IDevice_Ext NormalSpeaker = Software.Windows_Audio_v2.Speakers.FirstOrDefault(a => a.Normal_Speaker);
                     Software.Windows_Audio_v2.IDevice_Ext QuestSpeaker = Software.Windows_Audio_v2.Speakers.FirstOrDefault(a => a.Quest_Speaker);
 
@@ -145,7 +141,11 @@ namespace OVR_Dash_Manager.Forms.Settings
                 CheckSpeaker(Speaker, true, false, true);
             }
         }
-    }
 
-  
+        private void btn_Open_Auto_Launch_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Auto_Program_Launch.frm_Auto_Program_Launch_Settings pShow = new Auto_Program_Launch.frm_Auto_Program_Launch_Settings();
+            pShow.ShowDialog();
+        }
+    }
 }

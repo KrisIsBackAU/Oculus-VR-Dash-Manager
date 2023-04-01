@@ -167,7 +167,6 @@ namespace OVR_Dash_Manager.Dashes
 
             if (Installed)
             {
-
                 try
                 {
                     if (!String.IsNullOrEmpty(ProcessToStop))

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Security.Principal;
 
 namespace OVR_Dash_Manager.Functions
@@ -23,6 +25,28 @@ namespace OVR_Dash_Manager.Functions
         private static WindowsPrincipal GetWindowsPrincipal(WindowsIdentity pIdentity)
         {
             return new WindowsPrincipal(pIdentity);
+        }
+
+        public static string GetCurrentProcessDirectory()
+        {
+            Process Current = Process.GetCurrentProcess();
+            return Path.GetDirectoryName(Current.MainModule.FileName);
+        }
+
+        public static Process StartProcess(string Path, string Arguments = "")
+        {
+            if (File.Exists(Path))
+            {
+                return Process.Start(Path, Arguments);
+                // File
+            }
+            else
+            {
+                // try and build full url - else returns same as input
+                string URL = String_Functions.GetFullURL(Path);
+                return Process.Start(URL, Arguments);
+                // Web Site
+            }
         }
     }
 }

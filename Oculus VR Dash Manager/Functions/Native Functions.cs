@@ -7,7 +7,6 @@ namespace OVR_Dash_Manager.Functions
 {
     public static class Native_Functions
     {
-
         private const int SW_HIDE = 0;
         private const int SW_SHOWNORMAL = 1;
         private const int SW_SHOWMINIMIZED = 2;

@@ -53,5 +53,8 @@
     <Setting Name="Auto_Audio_Change_DefaultCommunication" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="Auto_Programs_JSON" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[]</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

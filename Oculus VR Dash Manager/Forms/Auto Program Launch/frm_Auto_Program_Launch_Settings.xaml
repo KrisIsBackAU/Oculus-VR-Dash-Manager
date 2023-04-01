@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OVR_Dash_Manager.Forms.Auto_Program_Launch"
-        Title="Auto Program Launch Settings" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
-    
+        Title="Auto Program Launch Settings" Height="500" Width="1000" Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,31 +15,45 @@
     </Window.Resources>
 
     <Grid x:Name="gd_Settings" Background="#FF212121">
-        <ListView x:Name="lv_Programs" Margin="10,45,10,10" AlternationCount="2" >
+        <ListView x:Name="lv_Programs" Margin="10,45,10,10" AlternationCount="2" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Icon" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image x:Name="img_Icon" Width="16" Height="16" />
+                                <Image x:Name="img_Icon" Width="16" Height="16" Source="{Binding Program_Icon}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="File Name" Width="Auto"/>
-                    <GridViewColumn Header="File Path" Width="Auto"/>
-                    <GridViewColumn Header="Auto Launch On Startup" Width="50">
+                    <GridViewColumn Header="File Name" Width="Auto" DisplayMemberBinding="{Binding File_Name}" />
+                    <GridViewColumn Header="Startup Launch" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox x:Name="chkbx_Auto_Launch_On_Startup" Content="Launch on Startup" />
+                                <CheckBox x:Name="chkbx_Auto_Launch_On_Startup" Content="" IsChecked="{Binding Startup_Launch, Mode=TwoWay}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Header="Closing Launch" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="chkbx_Auto_Launch_On_Closing" Content="" IsChecked="{Binding Closing_Launch, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Program Found" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="chkbx_Program_Found" IsEnabled="False" Content="" IsChecked="{Binding Program_Found}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn Header="File Path" Width="Auto" DisplayMemberBinding="{Binding Folder_Path}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btn_Add_Program" Content="Add Program" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="115" Height="23" Click="btn_Add_Program_Click"/>
-        <Button x:Name="btn_Remove_Program" Content="Remove Program" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="140" Height="23" Click="btn_Remove_Program_Click"/>
-        <Button x:Name="btn_Open_Program_Folder" Content="Open Program Folder" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="180" Height="23" Click="btn_Remove_Program_Click"/>
-
+        <Button x:Name="btn_Add_Program" Content="Add Program" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="115" Height="23" Click="btn_Add_Program_Click" />
+        <Button x:Name="btn_Remove_Program" Content="Remove Program" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="140" Height="23" Click="btn_Remove_Program_Click" />
+        <Button x:Name="btn_Open_Program_Folder" Content="Open Program Folder" HorizontalAlignment="Left" Margin="316,10,0,0" VerticalAlignment="Top" Width="180" Height="23" Click="btn_Open_Program_Folder_Click" />
     </Grid>
 </Window>

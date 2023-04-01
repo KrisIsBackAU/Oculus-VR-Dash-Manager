@@ -31,6 +31,7 @@ namespace OVR_Dash_Manager.Software
         public static Boolean ManagerCalledExit = false;
 
         private static bool _IsSetup = false;
+
         public static void Setup()
         {
             if (_IsSetup)
@@ -156,19 +157,23 @@ namespace OVR_Dash_Manager.Software
                     Steam_Running = State;
                     Steam_Running_State_Changed_Event?.Invoke();
                     break;
+
                 case "vrserver.exe":
                     Steam_VR_Server_Running = State;
                     Steam_VR_Running_State_Changed_Event?.Invoke();
                     break;
+
                 case "vrmonitor.exe":
                     Steam_VR_Monitor_Running = State;
                     break;
+
                 default:
                     break;
             }
         }
 
         #region SteamVR Focus Fix
+
         // Janky
         private static void Check_SteamVR_FocusProblem(object sender, ElapsedEventArgs args)
         {
@@ -206,7 +211,8 @@ namespace OVR_Dash_Manager.Software
                 }
             }
         }
-        #endregion
+
+        #endregion SteamVR Focus Fix
 
         public static void Close_SteamVR_Server()
         {

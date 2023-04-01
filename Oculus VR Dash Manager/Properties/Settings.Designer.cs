@@ -226,5 +226,17 @@ namespace OVR_Dash_Manager.Properties {
                 this["Auto_Audio_Change_DefaultCommunication"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("[]")]
+        public string Auto_Programs_JSON {
+            get {
+                return ((string)(this["Auto_Programs_JSON"]));
+            }
+            set {
+                this["Auto_Programs_JSON"] = value;
+            }
+        }
     }
 }

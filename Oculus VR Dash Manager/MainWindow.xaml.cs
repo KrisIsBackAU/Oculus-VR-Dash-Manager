@@ -1,5 +1,4 @@
 ﻿using OVR_Dash_Manager.Software;
-using PlaybackDeviceSwitcher;
 using System;
 using System.Globalization;
 using System.IO;
@@ -36,8 +35,6 @@ namespace OVR_Dash_Manager
 
             Title += " v" + typeof(MainWindow).Assembly.GetName().Version;
             Topmost = Properties.Settings.Default.AlwaysOnTop;
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -54,6 +51,8 @@ namespace OVR_Dash_Manager
             Dashes.Dash_Manager.PassMainForm(this);
             Software.Steam.Steam_VR_Running_State_Changed_Event += Steam_Steam_VR_Running_State_Changed_Event;
 
+            Software.Auto_Launch_Programs.Generate_List();
+
             Thread Start = new Thread(Startup);
             Start.IsBackground = true;
             Start.Start();
@@ -61,7 +60,6 @@ namespace OVR_Dash_Manager
 
         private void Steam_Steam_VR_Running_State_Changed_Event()
         {
-
             Functions_Old.DoAction(this, new Action(delegate ()
             {
                 lbl_SteamVR_Status.Content = Software.Steam.Steam_VR_Server_Running ? "Running" : "N/A";
@@ -79,6 +77,8 @@ namespace OVR_Dash_Manager
 
             Hide();
             Software.Oculus.StopOculusServices();
+
+            Software.Auto_Launch_Programs.Run_Closing_Programs();
         }
 
         private void RefreshUI()
@@ -99,7 +99,7 @@ namespace OVR_Dash_Manager
             Functions.Device_Watcher.DeviceConnected += Oculus_Link.StartLinkOnDevice;
             Functions.Device_Watcher.Start();
             ADB.Start();
-            /// 
+            ///
 
             Functions.Process_Watcher.IngoreEXEName("cmd.exe");
             Functions.Process_Watcher.IngoreEXEName("conhost.exe");
@@ -147,8 +147,7 @@ namespace OVR_Dash_Manager
                 Software.Windows_Audio_v2.Setup();
                 Software.Windows_Audio_v2.Set_To_Quest_Speaker_Auto();
 
-                //Software.Windows_Audio.Setup();
-                //Software.Windows_Audio.Set_To_Quest_Speaker_Auto();
+                Software.Auto_Launch_Programs.Run_Startup_Programs();
 
                 Functions_Old.DoAction(this, new Action(delegate ()
                 {
@@ -287,7 +286,7 @@ namespace OVR_Dash_Manager
 
             if (sender is Button button)
                 ActivateDash(button);
-            
+
             Thread ReactivateButtons = new Thread(Thread_ReactivateButtons);
             ReactivateButtons.IsBackground = true;
             ReactivateButtons.Start();

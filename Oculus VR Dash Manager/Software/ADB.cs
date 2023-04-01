@@ -13,7 +13,7 @@ namespace OVR_Dash_Manager.Software
         public static void Start()
         {
             /// ADB Auto Start Created By https://github.com/quagsirus
-            /// 
+            ///
 
             if (Properties.Settings.Default.QuestPolling)
             {
@@ -54,7 +54,7 @@ namespace OVR_Dash_Manager.Software
                 }
             }
 
-            /// 
+            ///
         }
 
         private static void RemoveWatcher()

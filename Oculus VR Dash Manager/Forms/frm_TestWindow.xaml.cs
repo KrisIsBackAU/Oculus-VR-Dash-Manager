@@ -33,7 +33,6 @@ namespace OVR_Dash_Manager.Forms
 
         private void Test_Function(object sender, ElapsedEventArgs args)
         {
-
         }
 
         private void btn_ChangeSteamRunTime_Click(object sender, RoutedEventArgs e)

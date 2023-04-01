@@ -7,6 +7,7 @@ namespace OVR_Dash_Manager.Functions
     public static class Device_Watcher
     {
         public delegate void NewDevice();
+
         public static event NewDevice DeviceConnected;
 
         private static ManagementEventWatcher _connected;
@@ -79,9 +80,9 @@ namespace OVR_Dash_Manager.Functions
 
             // Only take action if it's a connection event
             if (int.Parse(e.NewEvent.GetPropertyValue("EventType").ToString()) != 2) return;
-            
+
             // Limits event spam to once per second
-            if (DateTime.Now - _lastConnectionTime  < TimeSpan.FromSeconds(1)) return;
+            if (DateTime.Now - _lastConnectionTime < TimeSpan.FromSeconds(1)) return;
             _lastConnectionTime = DateTime.Now;
 
             DeviceConnected();

@@ -10,6 +10,7 @@ namespace OVR_Dash_Manager.Software
     public static class Oculus
     {
         private static string _Oculus_Main_Directory;
+
         public static string Oculus_Main_Directory
         {
             get { return _Oculus_Main_Directory; }
@@ -17,6 +18,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static string _Oculus_Dash_Directory;
+
         public static string Oculus_Dash_Directory
         {
             get { return _Oculus_Dash_Directory; }
@@ -24,6 +26,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static string _Oculus_Dash_File;
+
         public static string Oculus_Dash_File
         {
             get { return _Oculus_Dash_File; }
@@ -31,6 +34,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static string _Oculus_Client_EXE;
+
         public static string Oculus_Client_EXE
         {
             get { return _Oculus_Client_EXE; }
@@ -38,6 +42,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static string _Oculus_DebugTool_EXE;
+
         public static string Oculus_DebugTool_EXE
         {
             get { return _Oculus_DebugTool_EXE; }
@@ -45,6 +50,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static bool _Oculus_Is_Installed;
+
         public static bool Oculus_Is_Installed
         {
             get { return _Oculus_Is_Installed; }
@@ -52,6 +58,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static bool _Normal_Dash;
+
         public static bool Normal_Dash
         {
             get { return _Normal_Dash; }
@@ -59,6 +66,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static bool _Custom_Dash;
+
         public static bool Custom_Dash
         {
             get { return _Custom_Dash; }
@@ -66,6 +74,7 @@ namespace OVR_Dash_Manager.Software
         }
 
         private static String _Current_Dash_Name;
+
         public static String Current_Dash_Name
         {
             get { return _Current_Dash_Name; }
@@ -76,6 +85,7 @@ namespace OVR_Dash_Manager.Software
         private static bool _Report_ClientJustExited = false;
 
         private static bool _IsSetup = false;
+
         public static void Setup()
         {
             if (!_IsSetup)
@@ -94,6 +104,7 @@ namespace OVR_Dash_Manager.Software
             {
                 case "OculusClient.exe":
                     break;
+
                 default:
                     break;
             }
@@ -112,6 +123,7 @@ namespace OVR_Dash_Manager.Software
                         _Report_ClientJustExited = false;
                     }
                     break;
+
                 default:
                     break;
             }

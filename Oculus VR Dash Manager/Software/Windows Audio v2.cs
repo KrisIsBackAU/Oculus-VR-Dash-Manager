@@ -8,8 +8,8 @@ namespace OVR_Dash_Manager.Software
 {
     public static class Windows_Audio_v2
     {
-        static IAudioController controller;
-        static bool _IsSetup = false;
+        private static IAudioController controller;
+        private static bool _IsSetup = false;
         public static List<IDevice_Ext> Speakers;
 
         public static void Setup()
@@ -74,8 +74,11 @@ namespace OVR_Dash_Manager.Software
         public class IDevice_Ext : INotifyPropertyChanged
         {
             // Add To Class : INotifyPropertyChanged
+
             #region Notify Property Changed Members
+
             public event PropertyChangedEventHandler PropertyChanged;
+
             private void OnPropertyChanged(string propertyName)
             {
                 PropertyChangedEventHandler handler = PropertyChanged;
@@ -84,7 +87,8 @@ namespace OVR_Dash_Manager.Software
                     handler(this, new PropertyChangedEventArgs(propertyName));
                 }
             }
-            #endregion
+
+            #endregion Notify Property Changed Members
 
             public IDevice_Ext(IDevice Speaker)
             {
@@ -93,15 +97,15 @@ namespace OVR_Dash_Manager.Software
             }
 
             private bool _Normal_Speaker;
+
             public bool Normal_Speaker
             {
                 get { return _Normal_Speaker; }
                 set { if (value != _Normal_Speaker) _Normal_Speaker = value; OnPropertyChanged("Normal_Speaker"); }
             }
 
-
-
             private bool _Quest_Speaker;
+
             public bool Quest_Speaker
             {
                 get { return _Quest_Speaker; }
@@ -109,20 +113,20 @@ namespace OVR_Dash_Manager.Software
             }
 
             private string _Name;
+
             public string Name
             {
                 get { return _Name; }
                 set { if (value != null || value != _Name) _Name = value; OnPropertyChanged("Name"); }
             }
 
-
             private Guid _ID;
+
             public Guid ID
             {
                 get { return _ID; }
                 set { if (value != _ID) _ID = value; OnPropertyChanged("ID"); }
             }
-
         }
     }
 }
