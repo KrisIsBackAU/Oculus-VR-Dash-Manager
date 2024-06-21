@@ -317,7 +317,7 @@ namespace OVR_Dash_Manager
             if (Software.Oculus.Oculus_Is_Installed)
             {
                 if (Directory.Exists(Software.Oculus.Oculus_Dash_Directory))
-                    Functions_Old.ShowFileInDirectory(Software.Oculus.Oculus_Dash_Directory);
+                    Functions_Old.ShowDirectory(Software.Oculus.Oculus_Dash_Directory);
             }
         }
 

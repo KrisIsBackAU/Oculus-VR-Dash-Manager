@@ -19,6 +19,11 @@ namespace OVR_Dash_Manager
             Process.Start("explorer.exe", $@"/select,""{FullPath}""");
         }
 
+        public static void ShowDirectory(String FullPath)
+        {
+            Process.Start("explorer.exe", $"{FullPath}");
+        }
+
         public static String GetPageHTML(String pURL, String Method = "GET", CookieContainer Cookies = null, String FormParams = "", String ContentType = "")
         {
             if (pURL.Contains("&amp;"))
