@@ -148,7 +148,7 @@ namespace OVR_Dash_Manager.Dashes
             switch (Dash)
             {
                 case Dash_Type.Unknown:
-                    return "Unknown";
+                    return "Unknown - Meta Changes ?";
 
                 case Dash_Type.Normal:
                     return Oculus_Dash.DisplayName;

@@ -19,8 +19,8 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
     <NeutralLanguage>en-AU</NeutralLanguage>
     <RepositoryUrl>https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</RepositoryUrl>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyVersion>1.0.3.4</AssemblyVersion>
-    <FileVersion>1.0.3.4</FileVersion>
+    <AssemblyVersion>1.0.3.5</AssemblyVersion>
+    <FileVersion>1.0.3.5</FileVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
@@ -41,7 +41,6 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
 
   <ItemGroup>
     <PackageReference Include="AdvancedSharpAdbClient" Version="2.5.4" />
-    <PackageReference Include="BrettHewitt.PlaybackDeviceSwitcher" Version="1.0.5" />
     <PackageReference Include="InputSimulator" Version="1.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="6.0.0" />
@@ -85,10 +84,10 @@ https://github.com/KrisIsBackAU/Oculus-VR-Dash-Manager</PackageReleaseNotes>
 
   <ItemGroup>
     <Reference Include="AudioSwitcher.AudioApi">
-      <HintPath>..\..\..\..\..\Downloads\AudioSwitcher-master\AudioSwitcher.AudioApi\bin\Debug\net45\AudioSwitcher.AudioApi.dll</HintPath>
+      <HintPath>DLLs\AudioSwitcher.AudioApi.dll</HintPath>
     </Reference>
     <Reference Include="AudioSwitcher.AudioApi.CoreAudio">
-      <HintPath>..\..\..\..\..\Downloads\AudioSwitcher-master\AudioSwitcher.AudioApi.CoreAudio\bin\Debug\net45\AudioSwitcher.AudioApi.CoreAudio.dll</HintPath>
+      <HintPath>DLLs\AudioSwitcher.AudioApi.CoreAudio.dll</HintPath>
     </Reference>
   </ItemGroup>
 

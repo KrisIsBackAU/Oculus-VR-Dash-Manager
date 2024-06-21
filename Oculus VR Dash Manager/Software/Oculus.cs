@@ -191,6 +191,15 @@ namespace OVR_Dash_Manager.Software
             if (cert.Issuer == "CN=DigiCert SHA2 Assured ID Code Signing CA, OU=www.digicert.com, O=DigiCert Inc, C=US")
                 Legit = true;
 
+            if (cert.Issuer == "CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1, O=\"DigiCert, Inc.\", C=US")
+                Legit = true;
+
+            if (!Legit)
+            {
+                if (cert.Issuer.Replace(",", "").Replace(" ", "").Contains("DigiCertInc")) // Last Resort
+                    Legit = true;
+            }
+
             return Legit;
         }
 
@@ -251,11 +260,20 @@ namespace OVR_Dash_Manager.Software
                         {
                             // try more then once
 
-                            Functions.Native_Functions.MinimizeExternalWindow(Client.MainWindowHandle);
+                            if (Client.HasExited)
+                                break;
 
-                            Thread.Sleep(250);
+                            try
+                            {
+                                Functions.Native_Functions.MinimizeExternalWindow(Client.MainWindowHandle);
+                                Thread.Sleep(250);
+                                Functions.Native_Functions.GetWindowRect(Client.MainWindowHandle, ref Location);
+                            }
+                            catch (Exception)
+                            {
 
-                            Functions.Native_Functions.GetWindowRect(Client.MainWindowHandle, ref Location);
+                                throw;
+                            }
 
                             if (double.IsNaN(Location.Left))
                                 break;

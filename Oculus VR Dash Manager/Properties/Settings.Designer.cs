@@ -238,5 +238,53 @@ namespace OVR_Dash_Manager.Properties {
                 this["Auto_Programs_JSON"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid Normal_Microphone_GUID {
+            get {
+                return ((global::System.Guid)(this["Normal_Microphone_GUID"]));
+            }
+            set {
+                this["Normal_Microphone_GUID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid Quest_Microphone_GUID {
+            get {
+                return ((global::System.Guid)(this["Quest_Microphone_GUID"]));
+            }
+            set {
+                this["Quest_Microphone_GUID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Automatic_Microphone_Switching {
+            get {
+                return ((bool)(this["Automatic_Microphone_Switching"]));
+            }
+            set {
+                this["Automatic_Microphone_Switching"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Auto_Microphone_Change_DefaultCommunication {
+            get {
+                return ((bool)(this["Auto_Microphone_Change_DefaultCommunication"]));
+            }
+            set {
+                this["Auto_Microphone_Change_DefaultCommunication"] = value;
+            }
+        }
     }
 }

@@ -69,6 +69,7 @@ namespace OVR_Dash_Manager
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Software.Windows_Audio_v2.Set_To_Normal_Speaker_Auto();
+            Software.Windows_Audio_v2.Set_To_Normal_Microphone_Auto();
             Software.ADB.Stop();
             Functions.Process_Watcher.Stop();
 
@@ -119,7 +120,7 @@ namespace OVR_Dash_Manager
 
                 if (!Dashes.Dash_Manager.Oculus_Official_Dash_Installed())
                 {
-                    Functions_Old.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Official Oculus Dash Not Found, Replace Original Oculus Dash"; }));
+                    Functions_Old.DoAction(this, new Action(delegate () { lbl_CurrentSetting.Content = "Official Oculus Dash Not Found, Replace Original 'OculusDash.exe'"; btn_OpenDashLocation_Click(null, null); }));
                     return;
                 }
 
@@ -146,6 +147,7 @@ namespace OVR_Dash_Manager
 
                 Software.Windows_Audio_v2.Setup();
                 Software.Windows_Audio_v2.Set_To_Quest_Speaker_Auto();
+                Software.Windows_Audio_v2.Set_To_Quest_Microphone_Auto();
 
                 Software.Auto_Launch_Programs.Run_Startup_Programs();
 
@@ -159,6 +161,16 @@ namespace OVR_Dash_Manager
                 }));
 
                 FireUIEvents = true;
+
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (Keyboard_Simuator == null)
+                        Keyboard_Simuator = new InputSimulator();
+
+                    Keyboard_Simuator.Keyboard.KeyPress(VirtualKeyCode.F20);
+                }
+
             }
             else
                 NotElevated();
@@ -334,7 +346,7 @@ namespace OVR_Dash_Manager
 
             if (Clicked.Tag is Dashes.Dash_Type Dash)
             {
-                if (Dashes.Dash_Manager.IsInstalled(Dash))
+                if (Dash == Dashes.Dash_Type.Exit || Dashes.Dash_Manager.IsInstalled(Dash))
                 {
                     if (Properties.Settings.Default.FastSwitch)
                         Dashes.Dash_Manager.Activate_FastTransition(Dash);

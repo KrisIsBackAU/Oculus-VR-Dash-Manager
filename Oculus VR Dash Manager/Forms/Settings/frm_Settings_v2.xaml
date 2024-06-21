@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OVR_Dash_Manager.Forms.Settings"
         mc:Ignorable="d"
-        Title="Settings" Width="863" Height="924.74" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Settings" Width="1571" Height="674.74" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -16,7 +16,7 @@
     </Window.Resources>
 
     <Grid x:Name="gd_Settings" Background="#FF212121">
-        <GroupBox Header="Dash Manager Settings" Margin="10,0" Height="177" VerticalAlignment="Top">
+        <GroupBox Header="Dash Manager Settings" Margin="10,0,0,0" Height="193" VerticalAlignment="Top" HorizontalAlignment="Left" Width="756">
             <Grid Margin="0">
                 <local:uc_Setting Setting="AlwaysOnTop" Margin="10,3,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
                 <Label Content="Keep Dash Manager On Top" Margin="166,3,10,0" VerticalAlignment="Top" Height="30" />
@@ -26,7 +26,7 @@
                 <Label Content="Ignore SteamVR Status for Hover Button Actions" HorizontalAlignment="Left" Margin="166,79,0,0" VerticalAlignment="Top" Height="30" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Oculus Settings" Margin="10,177,10,0" Height="280" VerticalAlignment="Top">
+        <GroupBox Header="Oculus Settings" Margin="10,198,0,0" Height="280" VerticalAlignment="Top" HorizontalAlignment="Left" Width="756">
             <Grid Margin="0">
                 <local:uc_Setting Setting="RunOculusClientOnStartup" Margin="10,8,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
                 <Label Content="Start Oculus Client Software - When Dash Manager Launches" Margin="165,8,10,0" VerticalAlignment="Top" Height="30" />
@@ -41,7 +41,7 @@
                 <Label Content="^ (EXPERIMENTAL, REQUIRES Developer Mode) - REQUIRES OCULUS DEVELOPER ACCOUNT" Margin="165,195,10,0" VerticalAlignment="Top" Height="30" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Steam / SteamVR Settings" Margin="10,457,10,0" Height="135" VerticalAlignment="Top">
+        <GroupBox Header="Steam / SteamVR Settings" Margin="10,483,0,10" HorizontalAlignment="Left" Width="756">
             <Grid Margin="0">
                 <local:uc_Setting Setting="SteamVRFocusFix" Margin="10,3,0,0" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
                 <Label Content="Fix SteamVR Admin Program Focus Issue When it Occurs (Task View Glitch)" Margin="166,3,10,0" VerticalAlignment="Top" Height="30" />
@@ -49,24 +49,39 @@
                 <Label Content="Exit Oculus Link when User Closes Steam VR (Stable Link Connection Recommended)" Margin="166,41,10,0" VerticalAlignment="Top" Height="30" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Automatic Audio Switcher" Margin="10,592,10,0" Height="191" VerticalAlignment="Top">
+        <GroupBox Header="Automatic Speaker Switcher" Margin="771,0,10,0" Height="193" VerticalAlignment="Top">
             <Grid Margin="0">
                 <local:uc_Setting Setting="Automatic_Audio_Switching" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
-                <Label Content="Automatically Switch Audio on Program Launch (to Quest Speaker) &amp; Program Close (to Normal Speaker)" VerticalAlignment="Top" Height="30" Margin="155,0,10,0" />
+                <Label Content="Switch Speaker on Program Launch (Link Speaker) &amp; Program Close (Normal Speaker)" VerticalAlignment="Top" Height="30" Margin="155,0,10,0" />
                 <local:uc_Setting Setting="Auto_Audio_Change_DefaultCommunication" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" Margin="0,32,0,0" />
-                <Label Content="Change Default Communications Device As Well" VerticalAlignment="Top" Height="30" Margin="155,33,10,0" />
+                <Label Content="Change Speaker Default Communications Device As Well" VerticalAlignment="Top" Height="30" Margin="155,33,10,0" />
                 <ComboBox x:Name="cbo_NormalSpeaker" Margin="155,68,170,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="cbo_NormalSpeaker_SelectionChanged" />
                 <Label Content="Normal Speaker" VerticalAlignment="Top" Height="30" Margin="0,68,0,0" HorizontalAlignment="Left" Width="150" />
                 <ComboBox x:Name="cbo_QuestSpeaker" Margin="155,103,170,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="cbo_QuestSpeaker_SelectionChanged" />
-                <Label Content="Quest Speaker" VerticalAlignment="Top" Height="30" Margin="0,103,0,0" HorizontalAlignment="Left" Width="150" />
-                <Button x:Name="btn_Set_Default_Normal" Margin="650,68,10,0" Content="Set As Current" Click="btn_Set_Default_Normal_Click" Height="30" VerticalAlignment="Top" />
-                <Button x:Name="btn_Set_Default_Quest" Margin="650,103,10,0" Content="Set As Current" Click="btn_Set_Default_Quest_Click" Height="30" VerticalAlignment="Top" />
+                <Label Content="Link Speaker" VerticalAlignment="Top" Height="30" Margin="0,103,0,0" HorizontalAlignment="Left" Width="150" />
+                <Button x:Name="btn_Set_Default_Normal" Margin="0,68,10,0" Content="Set As Current" Click="btn_Set_Default_Normal_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155" />
+                <Button x:Name="btn_Set_Default_Quest" Margin="0,103,10,0" Content="Set As Current" Click="btn_Set_Default_Quest_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155" />
+
             </Grid>
         </GroupBox>
-        <GroupBox Header="Auto Launch Programs" Margin="10,788,10,10">
+        <GroupBox Header="Auto Launch Programs" Margin="771,483,10,10">
             <Grid Margin="0">
-                <Button x:Name="btn_Open_Auto_Launch_Settings" Margin="0,0,665,0" Content="Open Settings" Click="btn_Open_Auto_Launch_Settings_Click"    Height="30" VerticalAlignment="Top" />
-                <Label Content="Allows Programs to be started upon Dash Manage Startup &amp; Closing" VerticalAlignment="Top" Height="30" Margin="155,0,10,0" />
+                <Button x:Name="btn_Open_Auto_Launch_Settings" Content="Open Settings" Click="btn_Open_Auto_Launch_Settings_Click"    Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="153" />
+                <Label Content="Allows Programs to be started upon Dash Manage Startup &amp; Closing" VerticalAlignment="Top" Height="30" Margin="158,0,10,0" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Automatic Microphone Switcher" Margin="771,198,10,0" Height="280" VerticalAlignment="Top">
+            <Grid Margin="0">
+                <local:uc_Setting Setting="Automatic_Microphone_Switching" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" />
+                <Label Content="Switch Microphone on Program Launch (Link Microphone) &amp; Program Close (Normal Microphone)" VerticalAlignment="Top" Height="30" Margin="155,0,10,0" />
+                <local:uc_Setting Setting="Auto_Microphone_Change_DefaultCommunication" HorizontalAlignment="Left" Width="150" Height="30" VerticalAlignment="Top" Margin="0,32,0,0" />
+                <Label Content="Change Microphone Default Communications Device As Well" VerticalAlignment="Top" Height="30" Margin="155,33,10,0" />
+                <ComboBox x:Name="cbo_NormalMicrophone" Margin="155,71,170,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="cbo_NormalMicrophone_SelectionChanged" />
+                <Label Content="Normal Microphone" VerticalAlignment="Top" Height="30" Margin="0,71,0,0" HorizontalAlignment="Left" Width="150" />
+                <ComboBox x:Name="cbo_QuestMicrophone" Margin="155,106,170,0" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="cbo_QuestMicrophone_SelectionChanged" />
+                <Label Content="Link Microphone" VerticalAlignment="Top" Height="30" Margin="0,106,0,0" HorizontalAlignment="Left" Width="150" />
+                <Button x:Name="btn_Set_Default_Microphone_Normal" Margin="0,71,10,0" Content="Set As Current" Click="btn_Set_Default_Microphone_Normal_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155" />
+                <Button x:Name="btn_Set_Default_Microphone_Quest" Margin="0,106,10,0" Content="Set As Current" Click="btn_Set_Default_Microphone_Quest_Click" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155" />
             </Grid>
         </GroupBox>
     </Grid>

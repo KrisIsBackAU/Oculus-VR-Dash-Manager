@@ -11,6 +11,7 @@ namespace OVR_Dash_Manager.Software
         private static IAudioController controller;
         private static bool _IsSetup = false;
         public static List<IDevice_Ext> Speakers;
+        public static List<IDevice_Ext> Microphones;
 
         public static void Setup()
         {
@@ -18,9 +19,16 @@ namespace OVR_Dash_Manager.Software
                 return;
 
             controller = new CoreAudioController();
-            IEnumerable<IDevice> Devices = controller.GetDevices();
+            IEnumerable<IDevice> Speaker_Devices = controller.GetDevices(DeviceType.Playback);
+            IEnumerable<IDevice> Microphone_Devices = controller.GetDevices(DeviceType.Capture);
+
             Speakers = new List<IDevice_Ext>();
-            foreach (IDevice item in Devices)
+            Microphones = new List<IDevice_Ext>();
+
+            Speakers.Add(new IDevice_Ext("None"));
+            Microphones.Add(new IDevice_Ext("None"));
+
+            foreach (IDevice item in Speaker_Devices)
             {
                 IDevice_Ext New = new IDevice_Ext(item);
 
@@ -31,6 +39,19 @@ namespace OVR_Dash_Manager.Software
                     New.Quest_Speaker = true;
 
                 Speakers.Add(New);
+            }
+
+            foreach (IDevice item in Microphone_Devices)
+            {
+                IDevice_Ext New = new IDevice_Ext(item);
+
+                if (New.ID == Properties.Settings.Default.Normal_Microphone_GUID)
+                    New.Normal_Speaker = true;
+
+                if (New.ID == Properties.Settings.Default.Quest_Microphone_GUID)
+                    New.Quest_Speaker = true;
+
+                Microphones.Add(New);
             }
 
             _IsSetup = true;
@@ -44,6 +65,14 @@ namespace OVR_Dash_Manager.Software
                 Speaker.SetAsDefaultCommunications();
         }
 
+        public static void Set_Default_CaptureDevice(IDevice Microphone)
+        {
+            Microphone.SetAsDefault();
+
+            if (Properties.Settings.Default.Auto_Microphone_Change_DefaultCommunication)
+                Microphone.SetAsDefaultCommunications();
+        }
+
         public static void Set_Default_PlaybackDevice(Guid Speaker_ID)
         {
             IDevice Speaker = controller.GetDevice(Speaker_ID);
@@ -51,6 +80,13 @@ namespace OVR_Dash_Manager.Software
                 Set_Default_PlaybackDevice(Speaker);
         }
 
+        public static void Set_Default_CaptureDevice(Guid Speaker_ID)
+        {
+            IDevice Speaker = controller.GetDevice(Speaker_ID);
+            if (Speaker != null)
+                Set_Default_CaptureDevice(Speaker);
+
+        }
         public static void Set_To_Normal_Speaker_Auto(Boolean Force = false)
         {
             if (Properties.Settings.Default.Automatic_Audio_Switching || Force)
@@ -68,6 +104,26 @@ namespace OVR_Dash_Manager.Software
                 IDevice Speaker = controller.GetDevice(Properties.Settings.Default.Quest_Speaker_GUID);
                 if (Speaker != null)
                     Set_Default_PlaybackDevice(Speaker);
+            }
+        }
+
+        public static void Set_To_Normal_Microphone_Auto(Boolean Force = false)
+        {
+            if (Properties.Settings.Default.Automatic_Microphone_Switching || Force)
+            {
+                IDevice Speaker = controller.GetDevice(Properties.Settings.Default.Normal_Microphone_GUID);
+                if (Speaker != null)
+                    Set_Default_CaptureDevice(Speaker);
+            }
+        }
+
+        public static void Set_To_Quest_Microphone_Auto(Boolean Force = false)
+        {
+            if (Properties.Settings.Default.Automatic_Microphone_Switching || Force)
+            {
+                IDevice Speaker = controller.GetDevice(Properties.Settings.Default.Quest_Microphone_GUID);
+                if (Speaker != null)
+                    Set_Default_CaptureDevice(Speaker);
             }
         }
 
@@ -89,6 +145,11 @@ namespace OVR_Dash_Manager.Software
             }
 
             #endregion Notify Property Changed Members
+
+            public IDevice_Ext(String Name)
+            {
+                this.Name = Name;
+            }
 
             public IDevice_Ext(IDevice Speaker)
             {

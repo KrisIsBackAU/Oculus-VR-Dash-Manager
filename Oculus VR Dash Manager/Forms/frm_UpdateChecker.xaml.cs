@@ -64,6 +64,14 @@ namespace OVR_Dash_Manager.Forms
                 Functions_Old.DoAction(this, new Action(delegate () { btn_ItsKaitlyn03_Download.IsEnabled = true; }));
         }
 
+        private void Check_Offical_Update()
+        {
+            Dashes.OVR_Dash Offical = Dashes.Dash_Manager.GetDash(Dashes.Dash_Type.Normal);
+            FileVersionInfo Info = FileVersionInfo.GetVersionInfo(Path.Combine(Software.Oculus.Oculus_Dash_Directory, Offical.DashFileName));
+
+
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lbl_DashManager_LastCheck.Content = "Checking";
